@@ -7,671 +7,869 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
   <style>
-    * {
-      font-family: 'Inter', sans-serif;
+    :root {
+      --primary: #8B5CF6;
+      --secondary: #3B82F6;
+      --accent: #F59E0B;
+      --dark: #0F172A;
+      --light: #F8FAFC;
     }
     
-    /* Smooth scrolling */
+    * {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
     html {
       scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+      color: var(--light);
+      min-height: 100vh;
+      overflow-x: hidden;
     }
     
     /* Custom animations */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    @keyframes fadeInLeft {
-      from {
-        opacity: 0;
-        transform: translateX(-30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-    
-    @keyframes fadeInRight {
-      from {
-        opacity: 0;
-        transform: translateX(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-    
     @keyframes float {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-10px);
-      }
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
     }
     
-    @keyframes pulse {
-      0%, 100% {
-        opacity: 1;
-      }
-      50% {
-        opacity: 0.5;
-      }
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
     }
     
-    @keyframes blob {
-      0% {
-        transform: translate(0px, 0px) scale(1);
-      }
-      33% {
-        transform: translate(30px, -50px) scale(1.1);
-      }
-      66% {
-        transform: translate(-20px, 20px) scale(0.9);
-      }
-      100% {
-        transform: translate(0px, 0px) scale(1);
-      }
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
     
-    .animate-fadeInUp {
-      animation: fadeInUp 0.8s ease-out forwards;
+    @keyframes slideInLeft {
+      from { transform: translateX(-100px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
     }
     
-    .animate-fadeInLeft {
-      animation: fadeInLeft 0.8s ease-out forwards;
+    @keyframes slideInRight {
+      from { transform: translateX(100px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
     }
     
-    .animate-fadeInRight {
-      animation: fadeInRight 0.8s ease-out forwards;
+    @keyframes fadeInUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
     
-    .animate-float {
-      animation: float 3s ease-in-out infinite;
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px var(--primary); }
+      50% { box-shadow: 0 0 40px var(--primary); }
     }
     
-    .animate-pulse {
-      animation: pulse 2s ease-in-out infinite;
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
     
-    .animate-blob {
-      animation: blob 7s infinite;
+    /* Animation classes */
+    .animate-float { animation: float 6s ease-in-out infinite; }
+    .animate-shimmer { 
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      background-size: 200% 100%;
+      animation: shimmer 2s infinite;
+    }
+    .animate-gradient { 
+      background: linear-gradient(-45deg, var(--primary), var(--secondary), var(--accent), var(--primary));
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+    }
+    .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+    .animate-rotate { animation: rotate 20s linear infinite; }
+    
+    /* Glass morphism */
+    .glass {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
     
-    .delay-100 {
-      animation-delay: 0.1s;
-    }
-    
-    .delay-200 {
-      animation-delay: 0.2s;
-    }
-    
-    .delay-300 {
-      animation-delay: 0.3s;
-    }
-    
-    .delay-400 {
-      animation-delay: 0.4s;
-    }
-    
-    .delay-500 {
-      animation-delay: 0.5s;
-    }
-    
-    .delay-600 {
-      animation-delay: 0.6s;
-    }
-    
-    .delay-700 {
-      animation-delay: 0.7s;
-    }
-    
-    .delay-800 {
-      animation-delay: 0.8s;
-    }
-    
-    .delay-900 {
-      animation-delay: 0.9s;
-    }
-    
-    .delay-1000 {
-      animation-delay: 1s;
-    }
-    
-    /* Hide elements initially for animation */
-    .js-hidden {
-      opacity: 0;
+    .glass-dark {
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
     
     /* Gradient text */
     .gradient-text {
-      background: linear-gradient(90deg, #8B5CF6, #3B82F6);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-    }
-    
-    .gradient-bg {
-      background: linear-gradient(135deg, #1E293B, #0F172A);
-    }
-    
-    /* Skill card hover effect */
-    .skill-card {
-      transition: all 0.3s ease;
-      background: rgba(30, 41, 59, 0.7);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    .skill-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.3);
-      border-color: rgba(139, 92, 246, 0.5);
-    }
-    
-    /* Project card hover effect */
-    .project-card {
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-      background: rgba(30, 41, 59, 0.7);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    .project-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    
-    .project-card:hover::before {
-      opacity: 1;
-    }
-    
-    .project-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 25px -5px rgba(139, 92, 246, 0.3);
-      border-color: rgba(139, 92, 246, 0.5);
+      background-clip: text;
     }
     
     /* Custom scrollbar */
     ::-webkit-scrollbar {
-      width: 8px;
+      width: 10px;
     }
     
     ::-webkit-scrollbar-track {
-      background: #1E293B;
+      background: var(--dark);
     }
     
     ::-webkit-scrollbar-thumb {
-      background: #8B5CF6;
-      border-radius: 10px;
+      background: linear-gradient(var(--primary), var(--secondary));
+      border-radius: 5px;
     }
     
-    ::-webkit-scrollbar-thumb:hover {
-      background: #7C3AED;
+    /* Responsive typography */
+    h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); }
+    h2 { font-size: clamp(2rem, 4vw, 3.5rem); }
+    h3 { font-size: clamp(1.75rem, 3vw, 2.5rem); }
+    p { font-size: clamp(1rem, 2vw, 1.1rem); }
+    
+    /* Mobile menu */
+    .mobile-menu {
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in-out;
     }
     
-    /* Particle background */
-    .particles {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+    .mobile-menu.active {
+      transform: translateX(0);
+    }
+    
+    /* Project card hover effect */
+    .project-card {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+    
+    .project-card:hover {
+      transform: translateY(-10px) rotateX(5deg);
+      box-shadow: 0 25px 50px -12px rgba(139, 92, 246, 0.5);
+    }
+    
+    /* Skill progress bars */
+    .skill-progress {
+      height: 6px;
+      border-radius: 3px;
       overflow: hidden;
-      z-index: 0;
+      background: rgba(255, 255, 255, 0.1);
     }
     
+    .skill-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: 3px;
+      transition: width 1s ease-in-out;
+    }
+    
+    /* Particle effects */
     .particle {
       position: absolute;
       border-radius: 50%;
-      background: rgba(139, 92, 246, 0.1);
-      animation: float 6s infinite linear;
+      pointer-events: none;
+      z-index: 0;
     }
     
-    /* Glow effect */
-    .glow {
-      box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+    /* Responsive grid */
+    .auto-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+      gap: 1.5rem;
     }
     
-    /* Section background */
-    .section-bg {
-      background: rgba(15, 23, 42, 0.7);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+    /* Loading animation */
+    .loading {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(139, 92, 246, 0.3);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: rotate 1s linear infinite;
     }
     
-    /* Navbar glass effect */
-    .navbar-glass {
-      background: rgba(15, 23, 42, 0.8);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    /* 3D card effect */
+    .card-3d {
+      transform-style: preserve-3d;
+      transition: transform 0.5s;
     }
     
-    /* Typewriter effect */
-    .typewriter {
-      overflow: hidden;
-      border-right: 2px solid #8B5CF6;
-      white-space: nowrap;
-      margin: 0 auto;
-      animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+    .card-3d:hover {
+      transform: rotateY(10deg) rotateX(5deg);
     }
     
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
+    /* Responsive utilities */
+    @media (max-width: 768px) {
+      .container-padding {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      
+      .mobile-column {
+        flex-direction: column;
+      }
+      
+      .text-center-mobile {
+        text-align: center;
+      }
     }
     
-    @keyframes blink-caret {
-      from, to { border-color: transparent }
-      50% { border-color: #8B5CF6; }
+    /* Print styles */
+    @media print {
+      .no-print {
+        display: none;
+      }
     }
   </style>
 </head>
 
-<body class="bg-gradient-to-br from-gray-900 to-gray-800 text-gray-200 min-h-screen">
-  <!-- Particle Background -->
-  <div class="particles" id="particles"></div>
+<body class="relative overflow-x-hidden">
+  <!-- Animated background elements -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/5 rounded-full animate-float animate-rotate"></div>
+    <div class="absolute top-3/4 right-1/4 w-64 h-64 bg-blue-500/5 rounded-full animate-float delay-1000"></div>
+    <div class="absolute bottom-1/4 right-1/2 w-80 h-80 bg-orange-500/5 rounded-full animate-float delay-2000"></div>
+  </div>
 
   <!-- Navbar -->
-  <header class="flex justify-between items-center py-6 px-8 sticky top-0 z-50 navbar-glass js-hidden">
-    <h1 class="text-2xl font-bold text-white">Natnael Mitiku</h1>
-    <nav class="space-x-6 text-sm font-medium">
-      <a href="#about" class="hover:text-purple-400 transition-colors duration-300">About</a>
-      <a href="#skills" class="hover:text-purple-400 transition-colors duration-300">Skills</a>
-      <a href="#projects" class="hover:text-purple-400 transition-colors duration-300">Projects</a>
-      <a href="#contact" class="hover:text-purple-400 transition-colors duration-300">Contact</a>
-    </nav>
-  </header>
-
-  <!-- Hero -->
-  <section class="relative flex flex-col items-center text-center py-24 px-6 overflow-hidden">
-    <div class="absolute top-10 left-10 w-20 h-20 bg-purple-500/10 rounded-full animate-blob"></div>
-    <div class="absolute top-40 right-20 w-16 h-16 bg-blue-500/10 rounded-full animate-blob delay-200"></div>
-    <div class="absolute bottom-20 left-20 w-24 h-24 bg-indigo-500/10 rounded-full animate-blob delay-400"></div>
+  <nav class="fixed top-0 w-full z-50 glass-dark py-4">
+    <div class="container mx-auto px-6 flex justify-between items-center">
+      <div class="text-2xl font-bold">
+        <span class="gradient-text">NM</span>
+      </div>
+      
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex space-x-8">
+        <a href="#home" class="group relative">
+          <span class="text-white hover:text-purple-400 transition-colors">Home</span>
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400 group-hover:w-full transition-all duration-300"></span>
+        </a>
+        <a href="#about" class="group relative">
+          <span class="text-white hover:text-purple-400 transition-colors">About</span>
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400 group-hover:w-full transition-all duration-300"></span>
+        </a>
+        <a href="#skills" class="group relative">
+          <span class="text-white hover:text-purple-400 transition-colors">Skills</span>
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400 group-hover:w-full transition-all duration-300"></span>
+        </a>
+        <a href="#projects" class="group relative">
+          <span class="text-white hover:text-purple-400 transition-colors">Projects</span>
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400 group-hover:w-full transition-all duration-300"></span>
+        </a>
+        <a href="#contact" class="group relative">
+          <span class="text-white hover:text-purple-400 transition-colors">Contact</span>
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400 group-hover:w-full transition-all duration-300"></span>
+        </a>
+      </div>
+      
+      <!-- Mobile Menu Button -->
+      <button id="mobileMenuBtn" class="md:hidden text-white text-2xl">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <!-- Action Button -->
+      <a href="mailto:mitikunathan@gmail.com" class="hidden md:block px-6 py-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105">
+        Hire Me
+      </a>
+    </div>
     
-    <div class="relative z-10 js-hidden">
-      <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4">Hi, I'm <span class="gradient-text">Natnael Mitiku</span></h2>
-      <div class="typewriter text-lg md:text-xl text-gray-300 max-w-2xl mb-8 mx-auto">
-        A passionate Full-Stack Developer building modern, responsive, and scalable web applications.
-      </div>
-      <div class="flex gap-4 justify-center">
-        <a href="mailto:mitikunathan@gmail.com" class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-3 rounded-lg shadow-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:-translate-y-1 glow">Contact Me</a>
-        <a href="Resumes.pdf" class="border border-purple-500 text-purple-400 px-6 py-3 rounded-lg hover:bg-purple-900/30 transition-all duration-300 transform hover:-translate-y-1">View Resume</a>
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 h-screen w-64 glass-dark md:hidden z-50 p-8">
+      <button id="closeMenu" class="absolute top-6 right-6 text-white text-2xl">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="flex flex-col space-y-8 mt-16">
+        <a href="#home" class="text-xl text-white hover:text-purple-400 transition-colors">Home</a>
+        <a href="#about" class="text-xl text-white hover:text-purple-400 transition-colors">About</a>
+        <a href="#skills" class="text-xl text-white hover:text-purple-400 transition-colors">Skills</a>
+        <a href="#projects" class="text-xl text-white hover:text-purple-400 transition-colors">Projects</a>
+        <a href="#contact" class="text-xl text-white hover:text-purple-400 transition-colors">Contact</a>
+        <a href="mailto:mitikunathan@gmail.com" class="mt-8 px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full text-center">
+          Hire Me
+        </a>
       </div>
     </div>
-    <div class="mt-16 animate-float">
-      <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 5V19M12 19L19 12M12 19L5 12" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="min-h-screen flex items-center relative pt-20">
+    <div class="container mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="animate-slideInLeft">
+          <div class="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/20 to-blue-500/20 mb-6">
+            <span class="text-sm font-semibold gradient-text">Full-Stack Developer</span>
+          </div>
+          <h1 class="font-bold leading-tight mb-6">
+            Hi, I'm <span class="gradient-text">Natnael Mitiku</span>
+          </h1>
+          <p class="text-xl text-gray-300 mb-8">
+            I build exceptional digital experiences that are fast, accessible, visually appealing, and responsive.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="#contact" class="px-8 py-3 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105">
+              Get In Touch
+            </a>
+            <a href="Resumes.pdf" class="px-8 py-3 glass rounded-full hover:shadow-lg transition-all duration-300 hover:scale-105">
+              View Resume
+            </a>
+          </div>
+          
+          <div class="mt-12 flex space-x-6">
+            <a href="https://github.com/Natnael22sds" class="w-12 h-12 rounded-full glass flex items-center justify-center hover:scale-110 transition-transform">
+              <i class="fab fa-github text-xl"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/natnael-mitiku-b080321b7/" class="w-12 h-12 rounded-full glass flex items-center justify-center hover:scale-110 transition-transform">
+              <i class="fab fa-linkedin text-xl"></i>
+            </a>
+            <a href="#" class="w-12 h-12 rounded-full glass flex items-center justify-center hover:scale-110 transition-transform">
+              <i class="fab fa-twitter text-xl"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="relative animate-slideInRight">
+          <div class="relative z-10">
+            <div class="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 mx-auto">
+              <div class="w-full h-full rounded-full glass flex items-center justify-center animate-float">
+                <div class="w-3/4 h-3/4 rounded-full animate-gradient flex items-center justify-center">
+                  <div class="w-4/5 h-4/5 rounded-full bg-dark flex items-center justify-center">
+                    <i class="fas fa-code text-6xl gradient-text"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="absolute top-0 left-1/4 w-32 h-32 rounded-full bg-purple-500/10 animate-pulse-glow"></div>
+          <div class="absolute bottom-0 right-1/4 w-24 h-24 rounded-full bg-blue-500/10 animate-pulse-glow delay-1000"></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <a href="#about" class="w-10 h-16 rounded-full glass flex items-center justify-center">
+        <i class="fas fa-chevron-down text-purple-400"></i>
+      </a>
     </div>
   </section>
 
-  <!-- About -->
+  <!-- About Section -->
   <section id="about" class="py-20 relative">
-    <div class="max-w-5xl mx-auto px-6">
-      <h3 class="text-3xl font-bold text-center mb-10 text-white js-hidden">About Me</h3>
-      <div class="grid md:grid-cols-2 gap-10">
-        <div class="section-bg rounded-xl p-8 js-hidden">
-          <p class="text-gray-300 leading-relaxed">
-            I'm a full-stack developer from Ethiopia, with experience creating powerful, user-friendly, and scalable web applications. I specialize in clean code, UI/UX design, and backend logic.
-          </p>
-          <p class="mt-4 text-gray-300">
-            I work with modern tools like <b class="text-purple-400">Tailwind CSS, PHP, JavaScript, Python</b>, and <b class="text-purple-400">MySQL</b> — ensuring performance, security, and responsiveness.
-          </p>
-          <div class="mt-6 flex items-center space-x-4">
-            <div class="w-12 h-12 rounded-full bg-purple-900/30 flex items-center justify-center border border-purple-500/30">
-              <i class="fas fa-map-marker-alt text-purple-400"></i>
-            </div>
-            <div>
-              <p class="font-medium text-white">Based in Ethiopia</p>
-              <p class="text-sm text-gray-400">Open to remote opportunities</p>
-            </div>
-          </div>
-        </div>
-        <div class="grid grid-cols-2 gap-4 text-sm js-hidden">
-          <div class="section-bg rounded-xl p-6">
-            <h4 class="font-semibold text-purple-400 mb-2">Frontend</h4>
-            <ul class="space-y-1 text-gray-300">
-              <li>HTML5 / CSS3</li>
-              <li>JavaScript (ES6+)</li>
-              <li>Tailwind CSS</li>
-              <li>React (basic)</li>
-            </ul>
-          </div>
-          <div class="section-bg rounded-xl p-6">
-            <h4 class="font-semibold text-purple-400 mb-2">Backend</h4>
-            <ul class="space-y-1 text-gray-300">
-              <li>PHP (OOP)</li>
-              <li>Python (Flask)</li>
-              <li>MySQL / MS SQL</li>
-              <li>RESTful APIs</li>
-            </ul>
-          </div>
-        </div>
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="font-bold mb-4">About Me</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto">Crafting digital solutions with precision and passion</p>
       </div>
-    </div>
-  </section>
-
-  <!-- Skills -->
-  <section id="skills" class="py-20 relative">
-    <div class="max-w-6xl mx-auto px-6">
-      <h3 class="text-3xl font-bold text-center mb-12 text-white js-hidden">My Skills</h3>
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        <!-- Skill 1 -->
-        <div class="skill-card rounded-xl p-6 flex flex-col items-center text-center js-hidden delay-100">
-          <div class="w-16 h-16 rounded-full bg-purple-900/30 flex items-center justify-center mb-4 border border-purple-500/30">
-            <i class="fab fa-vuejs text-2xl text-purple-400"></i>
-          </div>
-          <h4 class="font-semibold text-white">Vue.js</h4>
-        </div>
-        
-        <!-- Skill 2 -->
-        <div class="skill-card rounded-xl p-6 flex flex-col items-center text-center js-hidden delay-200">
-          <div class="w-16 h-16 rounded-full bg-purple-900/30 flex items-center justify-center mb-4 border border-purple-500/30">
-            <i class="fas fa-code text-2xl text-purple-400"></i>
-          </div>
-          <h4 class="font-semibold text-white">Nuxt.js</h4>
-        </div>
-        
-        <!-- Skill 3 -->
-        <div class="skill-card rounded-xl p-6 flex flex-col items-center text-center js-hidden delay-300">
-          <div class="w-16 h-16 rounded-full bg-purple-900/30 flex items-center justify-center mb-4 border border-purple-500/30">
-            <i class="fab fa-php text-2xl text-purple-400"></i>
-          </div>
-          <h4 class="font-semibold text-white">PHP (OOP)</h4>
-        </div>
-        
-        <!-- Skill 4 -->
-        <div class="skill-card rounded-xl p-6 flex flex-col items-center text-center js-hidden delay-400">
-          <div class="w-16 h-16 rounded-full bg-purple-900/30 flex items-center justify-center mb-4 border border-purple-500/30">
-            <i class="fab fa-python text-2xl text-purple-400"></i>
-          </div>
-          <h4 class="font-semibold text-white">Python</h4>
-        </div>
-        
-        <!-- Skill 5 -->
-        <div class="skill-card rounded-xl p-6 flex flex-col items-center text-center js-hidden delay-500">
-          <div class="w-16 h-16 rounded-full bg-purple-900/30 flex items-center justify-center mb-4 border border-purple-500/30">
-            <i class="fas fa-database text-2xl text-purple-400"></i>
-          </div>
-          <h4 class="font-semibold text-white">MySQL / MS SQL</h4>
-        </div>
-        
-        <!-- Skill 6 -->
-        <div class="skill-card rounded-xl p-6 flex flex-col items-center text-center js-hidden delay-600">
-          <div class="w-16 h-16 rounded-full bg-purple-900/30 flex items-center justify-center mb-4 border border-purple-500/30">
-            <i class="fas fa-cloud text-2xl text-purple-400"></i>
-          </div>
-          <h4 class="font-semibold text-white">RESTful APIs</h4>
-        </div>
-        
-        <!-- Skill 7 -->
-        <div class="skill-card rounded-xl p-6 flex flex-col items-center text-center js-hidden delay-700">
-          <div class="w-16 h-16 rounded-full bg-purple-900/30 flex items-center justify-center mb-4 border border-purple-500/30">
-            <i class="fab fa-html5 text-2xl text-purple-400"></i>
-          </div>
-          <h4 class="font-semibold text-white">HTML5 / CSS3</h4>
-        </div>
-        
-        <!-- Skill 8 -->
-        <div class="skill-card rounded-xl p-6 flex flex-col items-center text-center js-hidden delay-800">
-          <div class="w-16 h-16 rounded-full bg-purple-900/30 flex items-center justify-center mb-4 border border-purple-500/30">
-            <i class="fab fa-js-square text-2xl text-purple-400"></i>
-          </div>
-          <h4 class="font-semibold text-white">JavaScript (ES6+)</h4>
-        </div>
-        
-        <!-- Skill 9 -->
-        <div class="skill-card rounded-xl p-6 flex flex-col items-center text-center js-hidden delay-900">
-          <div class="w-16 h-16 rounded-full bg-purple-900/30 flex items-center justify-center mb-4 border border-purple-500/30">
-            <i class="fas fa-paint-brush text-2xl text-purple-400"></i>
-          </div>
-          <h4 class="font-semibold text-white">Tailwind CSS</h4>
-        </div>
-        
-        <!-- Skill 10 -->
-        <div class="skill-card rounded-xl p-6 flex flex-col items-center text-center js-hidden delay-1000">
-          <div class="w-16 h-16 rounded-full bg-purple-900/30 flex items-center justify-center mb-4 border border-purple-500/30">
-            <i class="fab fa-react text-2xl text-purple-400"></i>
-          </div>
-          <h4 class="font-semibold text-white">React (basic)</h4>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects -->
-  <section id="projects" class="py-20 relative">
-    <div class="max-w-6xl mx-auto px-6">
-      <h3 class="text-3xl font-bold text-center mb-10 text-white js-hidden">My Projects</h3>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Project 1 -->
-        <div class="project-card rounded-xl p-6 js-hidden">
-          <h4 class="text-lg font-bold text-purple-400 mb-2">Study Plan Management System</h4>
-          <p class="text-gray-300 text-sm mb-4">Multi-user system tracking exams, deadlines, and milestones with countdowns and dashboards.</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="text-xs bg-purple-900/30 text-purple-400 px-2 py-1 rounded border border-purple-500/30">PHP</span>
-            <span class="text-xs bg-purple-900/30 text-purple-400 px-2 py-1 rounded border border-purple-500/30">MySQL</span>
-            <span class="text-xs bg-purple-900/30 text-purple-400 px-2 py-1 rounded border border-purple-500/30">Tailwind</span>
-          </div>
-        </div>
-
-        <!-- Project 2 -->
-        <div class="project-card rounded-xl p-6 js-hidden delay-200">
-          <h4 class="text-lg font-bold text-purple-400 mb-2">Food Recipe Website</h4>
-          <p class="text-gray-300 text-sm mb-4">Modern recipe-sharing site supporting likes, ratings, and JWT authentication.</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="text-xs bg-purple-900/30 text-purple-400 px-2 py-1 rounded border border-purple-500/30">Vue</span>
-            <span class="text-xs bg-purple-900/30 text-purple-400 px-2 py-1 rounded border border-purple-500/30">Nuxt</span>
-            <span class="text-xs bg-purple-900/30 text-purple-400 px-2 py-1 rounded border border-purple-500/30">Go</span>
-          </div>
-        </div>
-
-        <!-- Project 3 -->
-        <div class="project-card rounded-xl p-6 js-hidden delay-400">
-          <h4 class="text-lg font-bold text-purple-400 mb-2">Class Scheduling System</h4>
-          <p class="text-gray-300 text-sm mb-4">Automated class scheduling with conflict resolution and announcements.</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="text-xs bg-purple-900/30 text-purple-400 px-2 py-1 rounded border border-purple-500/30">C#</span>
-            <span class="text-xs bg-purple-900/30 text-purple-400 px-2 py-1 rounded border border-purple-500/30">.NET</span>
-            <span class="text-xs bg-purple-900/30 text-purple-400 px-2 py-1 rounded border border-purple-500/30">SQL Server</span>
-          </div>
-        </div>
-
-            <!-- Project 4 -->
-        <div class="project-card rounded-xl p-6 js-hidden delay-400">
-          <h4 class="text-lg font-bold text-purple-400 mb-2">Hospital appointment system</h4>
-          <p class="text-gray-300 text-sm mb-4">A seamless, end-to-end hospital appointment system—Zocdoc-style—with integrated payment features.</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="text-xs bg-purple-900/30 text-purple-400 px-2 py-1 rounded border border-purple-500/30">PHP</span>
-            <span class="text-xs bg-purple-900/30 text-purple-400 px-2 py-1 rounded border border-purple-500/30">Javascript</span>
-            <span class="text-xs bg-purple-900/30 text-purple-400 px-2 py-1 rounded border border-purple-500/30">HTML5</span>
-             <span class="text-xs bg-purple-900/30 text-purple-400 px-2 py-1 rounded border border-purple-500/30">TailwindCSS</span>
-          </div>
-        </div>
-
-                <!-- Project 5 -->
-        <div class="project-card rounded-xl p-6 js-hidden delay-400">
-          <h4 class="text-lg font-bold text-purple-400 mb-2">E-commerce Website</h4>
-          <p class="text-gray-300 text-sm mb-4">A fully featured e-commerce website with secure payment processing and a smooth shopping experience.</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="text-xs bg-purple-900/30 text-purple-400 px-2 py-1 rounded border border-purple-500/30">PHP</span>
-            <span class="text-xs bg-purple-900/30 text-purple-400 px-2 py-1 rounded border border-purple-500/30">Javascript</span>
-            <span class="text-xs bg-purple-900/30 text-purple-400 px-2 py-1 rounded border border-purple-500/30">HTML5</span>
-             <span class="text-xs bg-purple-900/30 text-purple-400 px-2 py-1 rounded border border-purple-500/30">TailwindCSS</span>
-          </div>
-        </div>
-
-                 <!-- Project 6 -->
-        <div class="project-card rounded-xl p-6 js-hidden delay-400">
-          <h4 class="text-lg font-bold text-purple-400 mb-2">Event planner</h4>
-          <p class="text-gray-300 text-sm mb-4">An all-in-one event planning website with tools for managing clients, events and schedules</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="text-xs bg-purple-900/30 text-purple-400 px-2 py-1 rounded border border-purple-500/30">PHP</span>
-            <span class="text-xs bg-purple-900/30 text-purple-400 px-2 py-1 rounded border border-purple-500/30">Javascript</span>
-            <span class="text-xs bg-purple-900/30 text-purple-400 px-2 py-1 rounded border border-purple-500/30">HTML5</span>
-             <span class="text-xs bg-purple-900/30 text-purple-400 px-2 py-1 rounded border border-purple-500/30">TailwindCSS</span>
-          </div>
-        </div>
-
-                     <!-- Project 7 -->
-        <div class="project-card rounded-xl p-6 js-hidden delay-400">
-          <h4 class="text-lg font-bold text-purple-400 mb-2">Cupcake Inventory System</h4>
-          <p class="text-gray-300 text-sm mb-4">A complete cupcake inventory management system with stock tracking, automatic deduction, and sales reporting.</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="text-xs bg-purple-900/30 text-purple-400 px-2 py-1 rounded border border-purple-500/30">PHP</span>
-            <span class="text-xs bg-purple-900/30 text-purple-400 px-2 py-1 rounded border border-purple-500/30">Javascript</span>
-            <span class="text-xs bg-purple-900/30 text-purple-400 px-2 py-1 rounded border border-purple-500/30">HTML5</span>
-             <span class="text-xs bg-purple-900/30 text-purple-400 px-2 py-1 rounded border border-purple-500/30">TailwindCSS</span>
-          </div>
-        </div>
-
-                        <!-- Project 8 -->
-        <div class="project-card rounded-xl p-6 js-hidden delay-400">
-          <h4 class="text-lg font-bold text-purple-400 mb-2">Tesla Clone App</h4>
-          <p class="text-gray-300 text-sm mb-4">A fully functional Tesla clone app featuring vehicle selection, booking. Frontend only</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="text-xs bg-purple-900/30 text-purple-400 px-2 py-1 rounded border border-purple-500/30">React-native</span>
+      
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="relative">
+          <div class="glass p-8 rounded-3xl">
+            <p class="text-lg mb-6">
+              I'm a full-stack developer from Ethiopia, passionate about creating beautiful, functional, and user-centered digital experiences. With expertise in both frontend and backend technologies, I bring ideas to life with clean code and modern design principles.
+            </p>
+            <p class="text-lg mb-8">
+              My approach combines technical expertise with creative problem-solving to deliver solutions that not only meet requirements but exceed expectations.
+            </p>
             
+            <div class="grid grid-cols-2 gap-4">
+              <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500/20 to-blue-500/20 flex items-center justify-center">
+                  <i class="fas fa-map-marker-alt text-purple-400"></i>
+                </div>
+                <div>
+                  <p class="font-semibold">Location</p>
+                  <p class="text-sm text-gray-400">Ethiopia</p>
+                </div>
+              </div>
+              
+              <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500/20 to-blue-500/20 flex items-center justify-center">
+                  <i class="fas fa-clock text-purple-400"></i>
+                </div>
+                <div>
+                  <p class="font-semibold">Availability</p>
+                  <p class="text-sm text-gray-400">Open to Work</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+        
+        <div>
+          <div class="grid grid-cols-2 gap-6">
+            <div class="glass p-6 rounded-2xl hover:scale-105 transition-transform">
+              <div class="w-14 h-14 rounded-xl bg-gradient-to-r from-purple-500/20 to-blue-500/20 flex items-center justify-center mb-4">
+                <i class="fas fa-code text-2xl text-purple-400"></i>
+              </div>
+              <h4 class="font-semibold mb-2">Frontend</h4>
+              <p class="text-sm text-gray-400">HTML5, CSS3, JavaScript, React, Vue.js, Nuxt.js, Tailwind</p>
+            </div>
+            
+            <div class="glass p-6 rounded-2xl hover:scale-105 transition-transform">
+              <div class="w-14 h-14 rounded-xl bg-gradient-to-r from-purple-500/20 to-blue-500/20 flex items-center justify-center mb-4">
+                <i class="fas fa-server text-2xl text-purple-400"></i>
+              </div>
+              <h4 class="font-semibold mb-2">Backend</h4>
+              <p class="text-sm text-gray-400">PHP, Python, MySQL, REST APIs, Node.js</p>
+            </div>
+            
+            <div class="glass p-6 rounded-2xl hover:scale-105 transition-transform">
+              <div class="w-14 h-14 rounded-xl bg-gradient-to-r from-purple-500/20 to-blue-500/20 flex items-center justify-center mb-4">
+                <i class="fas fa-mobile-alt text-2xl text-purple-400"></i>
+              </div>
+              <h4 class="font-semibold mb-2">Mobile</h4>
+              <p class="text-sm text-gray-400">React Native, Flutter, PWA</p>
+            </div>
+            
+            <div class="glass p-6 rounded-2xl hover:scale-105 transition-transform">
+              <div class="w-14 h-14 rounded-xl bg-gradient-to-r from-purple-500/20 to-blue-500/20 flex items-center justify-center mb-4">
+                <i class="fas fa-tools text-2xl text-purple-400"></i>
+              </div>
+              <h4 class="font-semibold mb-2">Tools</h4>
+              <p class="text-sm text-gray-400">Git, Docker, VS Code, Figma</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-                     <!-- Project 7 -->
-        <div class="project-card rounded-xl p-6 js-hidden delay-400">
-          <h4 class="text-lg font-bold text-purple-400 mb-2">AI-Powered Customer Support Chatbot</h4>
-          <p class="text-gray-300 text-sm mb-4">An AI-powered customer support chatbot that provides instant assistance, learns over time, and enhances user satisfaction.</p>
+  <!-- Skills Section -->
+  <section id="skills" class="py-20 relative">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="font-bold mb-4">Technical Skills</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto">Mastering the tools that bring ideas to life</p>
+      </div>
+      
+      <div class="auto-grid">
+        <!-- Vue.js -->
+        <div class="glass p-6 rounded-2xl hover:scale-105 transition-transform">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-r from-purple-500/20 to-blue-500/20 flex items-center justify-center">
+              <i class="fab fa-vuejs text-2xl text-green-400"></i>
+            </div>
+            <span class="text-2xl font-bold gradient-text">95%</span>
+          </div>
+          <h4 class="font-semibold mb-2">Vue.js</h4>
+          <div class="skill-progress">
+            <div class="skill-progress-fill" style="width: 95%"></div>
+          </div>
+        </div>
+        
+        <!-- PHP -->
+        <div class="glass p-6 rounded-2xl hover:scale-105 transition-transform">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-r from-purple-500/20 to-blue-500/20 flex items-center justify-center">
+              <i class="fab fa-php text-2xl text-purple-400"></i>
+            </div>
+            <span class="text-2xl font-bold gradient-text">90%</span>
+          </div>
+          <h4 class="font-semibold mb-2">PHP (OOP)</h4>
+          <div class="skill-progress">
+            <div class="skill-progress-fill" style="width: 90%"></div>
+          </div>
+        </div>
+        
+        <!-- JavaScript -->
+        <div class="glass p-6 rounded-2xl hover:scale-105 transition-transform">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-r from-purple-500/20 to-blue-500/20 flex items-center justify-center">
+              <i class="fab fa-js-square text-2xl text-yellow-400"></i>
+            </div>
+            <span class="text-2xl font-bold gradient-text">92%</span>
+          </div>
+          <h4 class="font-semibold mb-2">JavaScript</h4>
+          <div class="skill-progress">
+            <div class="skill-progress-fill" style="width: 92%"></div>
+          </div>
+        </div>
+        
+        <!-- Python -->
+        <div class="glass p-6 rounded-2xl hover:scale-105 transition-transform">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-r from-purple-500/20 to-blue-500/20 flex items-center justify-center">
+              <i class="fab fa-python text-2xl text-blue-400"></i>
+            </div>
+            <span class="text-2xl font-bold gradient-text">88%</span>
+          </div>
+          <h4 class="font-semibold mb-2">Python</h4>
+          <div class="skill-progress">
+            <div class="skill-progress-fill" style="width: 88%"></div>
+          </div>
+        </div>
+        
+        <!-- MySQL -->
+        <div class="glass p-6 rounded-2xl hover:scale-105 transition-transform">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-r from-purple-500/20 to-blue-500/20 flex items-center justify-center">
+              <i class="fas fa-database text-2xl text-blue-400"></i>
+            </div>
+            <span class="text-2xl font-bold gradient-text">85%</span>
+          </div>
+          <h4 class="font-semibold mb-2">MySQL / SQL Server</h4>
+          <div class="skill-progress">
+            <div class="skill-progress-fill" style="width: 85%"></div>
+          </div>
+        </div>
+        
+        <!-- React -->
+        <div class="glass p-6 rounded-2xl hover:scale-105 transition-transform">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-r from-purple-500/20 to-blue-500/20 flex items-center justify-center">
+              <i class="fab fa-react text-2xl text-cyan-400"></i>
+            </div>
+            <span class="text-2xl font-bold gradient-text">80%</span>
+          </div>
+          <h4 class="font-semibold mb-2">React</h4>
+          <div class="skill-progress">
+            <div class="skill-progress-fill" style="width: 80%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="py-20 relative">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="font-bold mb-4">Featured Projects</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto">Turning ideas into reality with code</p>
+      </div>
+      
+      <div class="auto-grid">
+        <!-- Study Plan System -->
+        <div class="project-card glass p-6 rounded-2xl">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-r from-purple-500/20 to-blue-500/20 flex items-center justify-center mb-4">
+            <i class="fas fa-calendar-alt text-2xl text-purple-400"></i>
+          </div>
+          <h3 class="font-bold text-xl mb-2">Study Plan Management</h3>
+          <p class="text-gray-400 mb-4">Multi-user system for tracking exams, deadlines, and milestones with intelligent notifications.</p>
           <div class="flex flex-wrap gap-2">
-            <span class="text-xs bg-purple-900/30 text-purple-400 px-2 py-1 rounded border border-purple-500/30">PHP</span>
-            <span class="text-xs bg-purple-900/30 text-purple-400 px-2 py-1 rounded border border-purple-500/30">Javascript</span>
-            <span class="text-xs bg-purple-900/30 text-purple-400 px-2 py-1 rounded border border-purple-500/30">HTML5</span>
-             <span class="text-xs bg-purple-900/30 text-purple-400 px-2 py-1 rounded border border-purple-500/30">TailwindCSS</span>
+            <span class="px-3 py-1 text-xs rounded-full bg-purple-500/20 text-purple-300">PHP</span>
+            <span class="px-3 py-1 text-xs rounded-full bg-blue-500/20 text-blue-300">MySQL</span>
+            <span class="px-3 py-1 text-xs rounded-full bg-green-500/20 text-green-300">Tailwind</span>
           </div>
         </div>
-
+        
+        <!-- Food Recipe Website -->
+        <div class="project-card glass p-6 rounded-2xl">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-r from-purple-500/20 to-blue-500/20 flex items-center justify-center mb-4">
+            <i class="fas fa-utensils text-2xl text-purple-400"></i>
+          </div>
+          <h3 class="font-bold text-xl mb-2">Food Recipe Platform</h3>
+          <p class="text-gray-400 mb-4">Modern recipe-sharing with JWT authentication, ratings, and social features.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 text-xs rounded-full bg-green-500/20 text-green-300">Vue.js</span>
+            <span class="px-3 py-1 text-xs rounded-full bg-purple-500/20 text-purple-300">Nuxt.js</span>
+            <span class="px-3 py-1 text-xs rounded-full bg-blue-500/20 text-blue-300">Go</span>
+          </div>
+        </div>
+        
+        <!-- Hospital Appointment System -->
+        <div class="project-card glass p-6 rounded-2xl">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-r from-purple-500/20 to-blue-500/20 flex items-center justify-center mb-4">
+            <i class="fas fa-hospital text-2xl text-purple-400"></i>
+          </div>
+          <h3 class="font-bold text-xl mb-2">Hospital Appointment System</h3>
+          <p class="text-gray-400 mb-4">Zocdoc-style appointment booking with integrated payments and patient management.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 text-xs rounded-full bg-purple-500/20 text-purple-300">PHP</span>
+            <span class="px-3 py-1 text-xs rounded-full bg-yellow-500/20 text-yellow-300">JavaScript</span>
+            <span class="px-3 py-1 text-xs rounded-full bg-green-500/20 text-green-300">Tailwind</span>
+          </div>
+        </div>
+        
+        <!-- E-commerce Platform -->
+        <div class="project-card glass p-6 rounded-2xl">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-r from-purple-500/20 to-blue-500/20 flex items-center justify-center mb-4">
+            <i class="fas fa-shopping-cart text-2xl text-purple-400"></i>
+          </div>
+          <h3 class="font-bold text-xl mb-2">E-commerce Platform</h3>
+          <p class="text-gray-400 mb-4">Full-featured online store with secure payments and inventory management.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 text-xs rounded-full bg-purple-500/20 text-purple-300">PHP</span>
+            <span class="px-3 py-1 text-xs rounded-full bg-yellow-500/20 text-yellow-300">JavaScript</span>
+            <span class="px-3 py-1 text-xs rounded-full bg-green-500/20 text-green-300">MySQL</span>
+          </div>
+        </div>
+        
+        <!-- AI Chatbot -->
+        <div class="project-card glass p-6 rounded-2xl">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-r from-purple-500/20 to-blue-500/20 flex items-center justify-center mb-4">
+            <i class="fas fa-robot text-2xl text-purple-400"></i>
+          </div>
+          <h3 class="font-bold text-xl mb-2">AI Customer Support</h3>
+          <p class="text-gray-400 mb-4">Intelligent chatbot providing instant assistance and learning from interactions.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 text-xs rounded-full bg-purple-500/20 text-purple-300">Python</span>
+            <span class="px-3 py-1 text-xs rounded-full bg-yellow-500/20 text-yellow-300">JavaScript</span>
+            <span class="px-3 py-1 text-xs rounded-full bg-green-500/20 text-green-300">OpenAI API</span>
+          </div>
+        </div>
+        
+        <!-- Tesla Clone -->
+        <div class="project-card glass p-6 rounded-2xl">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-r from-purple-500/20 to-blue-500/20 flex items-center justify-center mb-4">
+            <i class="fas fa-car text-2xl text-purple-400"></i>
+          </div>
+          <h3 class="font-bold text-xl mb-2">Tesla Clone App</h3>
+          <p class="text-gray-400 mb-4">Mobile app replica with vehicle selection and booking features.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 text-xs rounded-full bg-cyan-500/20 text-cyan-300">React Native</span>
+            <span class="px-3 py-1 text-xs rounded-full bg-blue-500/20 text-blue-300">Redux</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact -->
+  <!-- Contact Section -->
   <section id="contact" class="py-20 relative">
-    <div class="max-w-4xl mx-auto text-center px-6">
-      <h3 class="text-3xl font-bold mb-6 text-white js-hidden">Get in Touch</h3>
-      <p class="text-gray-300 mb-6 js-hidden">I'm open to freelance, full-time remote work, and collaborations worldwide.</p>
-      <a href="mailto:mitikunathan@gmail.com" class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-lg shadow-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:-translate-y-1 glow js-hidden">Contact Me</a>
-      <div class="flex justify-center space-x-6 mt-8 text-xl text-gray-400 js-hidden">
-        <a href="https://github.com/Natnael22sds" class="hover:text-purple-400 transition-colors duration-300 transform hover:-translate-y-1"><i class="fab fa-github"></i></a>
-        <a href="https://www.linkedin.com/in/natnael-mitiku-b080321b7/" class="hover:text-purple-400 transition-colors duration-300 transform hover:-translate-y-1"><i class="fab fa-linkedin"></i></a>
-        <a href="#" class="hover:text-purple-400 transition-colors duration-300 transform hover:-translate-y-1"><i class="fab fa-twitter"></i></a>
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="font-bold mb-4">Let's Work Together</h2>
+          <p class="text-gray-400">Have a project in mind? Let's create something amazing!</p>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="glass p-8 rounded-2xl text-center hover:scale-105 transition-transform">
+            <div class="w-16 h-16 rounded-full bg-gradient-to-r from-purple-500/20 to-blue-500/20 flex items-center justify-center mx-auto mb-4">
+              <i class="fas fa-envelope text-2xl text-purple-400"></i>
+            </div>
+            <h4 class="font-semibold mb-2">Email</h4>
+            <p class="text-gray-400">mitikunathan@gmail.com</p>
+            <a href="mailto:mitikunathan@gmail.com" class="inline-block mt-4 text-purple-400 hover:text-purple-300">Send Message</a>
+          </div>
+          
+          <div class="glass p-8 rounded-2xl text-center hover:scale-105 transition-transform">
+            <div class="w-16 h-16 rounded-full bg-gradient-to-r from-purple-500/20 to-blue-500/20 flex items-center justify-center mx-auto mb-4">
+              <i class="fab fa-linkedin text-2xl text-purple-400"></i>
+            </div>
+            <h4 class="font-semibold mb-2">LinkedIn</h4>
+            <p class="text-gray-400">Connect professionally</p>
+            <a href="https://www.linkedin.com/in/natnael-mitiku-b080321b7/" class="inline-block mt-4 text-purple-400 hover:text-purple-300">View Profile</a>
+          </div>
+          
+          <div class="glass p-8 rounded-2xl text-center hover:scale-105 transition-transform">
+            <div class="w-16 h-16 rounded-full bg-gradient-to-r from-purple-500/20 to-blue-500/20 flex items-center justify-center mx-auto mb-4">
+              <i class="fab fa-github text-2xl text-purple-400"></i>
+            </div>
+            <h4 class="font-semibold mb-2">GitHub</h4>
+            <p class="text-gray-400">Explore my code</p>
+            <a href="https://github.com/Natnael22sds" class="inline-block mt-4 text-purple-400 hover:text-purple-300">View Projects</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <footer class="text-center py-6 text-sm text-gray-500 bg-gray-900/50 border-t border-gray-800">
-    © 2025 Natnael Mitiku — All Rights Reserved
+  <!-- Footer -->
+  <footer class="py-8 glass-dark">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="text-center md:text-left mb-4 md:mb-0">
+          <div class="text-2xl font-bold mb-2">
+            <span class="gradient-text">Natnael Mitiku</span>
+          </div>
+          <p class="text-gray-400">Full-Stack Developer</p>
+        </div>
+        
+        <div class="flex space-x-6">
+          <a href="https://github.com/Natnael22sds" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:scale-110 transition-transform">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/natnael-mitiku-b080321b7/" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:scale-110 transition-transform">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:scale-110 transition-transform">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div>
+      </div>
+      
+      <div class="text-center mt-8 pt-8 border-t border-gray-800">
+        <p class="text-gray-400">© 2025 Natnael Mitiku. All rights reserved.</p>
+      </div>
+    </div>
   </footer>
 
+  <!-- Back to Top Button -->
+  <button id="backToTop" class="fixed bottom-8 right-8 w-12 h-12 rounded-full glass flex items-center justify-center hover:scale-110 transition-transform z-40">
+    <i class="fas fa-chevron-up text-purple-400"></i>
+  </button>
+
+  <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
   <script>
-    // Create floating particles
-    function createParticles() {
-      const particlesContainer = document.getElementById('particles');
-      const particleCount = 20;
-      
-      for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.classList.add('particle');
-        
-        // Random size between 3 and 8px
-        const size = Math.random() * 5 + 3;
-        particle.style.width = `${size}px`;
-        particle.style.height = `${size}px`;
-        
-        // Random position
-        particle.style.left = `${Math.random() * 100}%`;
-        particle.style.top = `${Math.random() * 100}%`;
-        
-        // Random animation duration
-        const duration = Math.random() * 10 + 10;
-        particle.style.animationDuration = `${duration}s`;
-        
-        // Random delay
-        const delay = Math.random() * 5;
-        particle.style.animationDelay = `${delay}s`;
-        
-        particlesContainer.appendChild(particle);
-      }
-    }
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMenu = document.getElementById('closeMenu');
     
-    // Animation on scroll
-    document.addEventListener('DOMContentLoaded', function() {
-      // Create particles
-      createParticles();
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+    
+    closeMenu.addEventListener('click', () => {
+      mobileMenu.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    });
+    
+    // Back to Top Button
+    const backToTop = document.getElementById('backToTop');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTop.classList.remove('hidden');
+      } else {
+        backToTop.classList.add('hidden');
+      }
+    });
+    
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    // Animate elements on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fadeInUp');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    
+    // Observe all sections
+    document.querySelectorAll('section').forEach(section => {
+      observer.observe(section);
+    });
+    
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          // Close mobile menu if open
+          mobileMenu.classList.remove('active');
+          document.body.style.overflow = 'auto';
+          
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+    
+    // Add particle effect on click
+    document.addEventListener('click', (e) => {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      particle.style.left = `${e.clientX}px`;
+      particle.style.top = `${e.clientY}px`;
+      particle.style.width = '20px';
+      particle.style.height = '20px';
+      particle.style.background = `radial-gradient(circle, var(--primary), transparent)`;
       
-      // Initialize all elements with js-hidden class
-      const hiddenElements = document.querySelectorAll('.js-hidden');
+      document.body.appendChild(particle);
       
-      // Create an intersection observer
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            // Add animation class based on element position
-            if (entry.target.classList.contains('animate-fadeInUp')) {
-              entry.target.classList.add('animate-fadeInUp');
-            } else if (entry.target.classList.contains('animate-fadeInLeft')) {
-              entry.target.classList.add('animate-fadeInLeft');
-            } else if (entry.target.classList.contains('animate-fadeInRight')) {
-              entry.target.classList.add('animate-fadeInRight');
-            } else {
-              // Default animation
-              entry.target.classList.add('animate-fadeInUp');
-            }
-            
-            // Remove the hidden class
-            entry.target.classList.remove('js-hidden');
-          }
-        });
-      }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+      // Animate particle
+      particle.animate([
+        { transform: 'scale(0) translate(0, 0)', opacity: 1 },
+        { transform: 'scale(1) translate(var(--tx, 0), var(--ty, 0))', opacity: 0 }
+      ], {
+        duration: 600,
+        easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
       });
       
-      // Observe all hidden elements
-      hiddenElements.forEach(el => {
-        observer.observe(el);
+      // Remove particle after animation
+      setTimeout(() => particle.remove(), 600);
+    });
+    
+    // Skill animation on scroll
+    const skillObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const progressBars = entry.target.querySelectorAll('.skill-progress-fill');
+          progressBars.forEach(bar => {
+            const width = bar.style.width;
+            bar.style.width = '0';
+            setTimeout(() => {
+              bar.style.width = width;
+            }, 300);
+          });
+          skillObserver.unobserve(entry.target);
+        }
       });
+    }, { threshold: 0.5 });
+    
+    document.querySelectorAll('.auto-grid').forEach(grid => {
+      skillObserver.observe(grid);
+    });
+    
+    // Initialize with animations
+    document.addEventListener('DOMContentLoaded', () => {
+      // Add initial animations
+      document.querySelectorAll('.project-card, .glass').forEach(el => {
+        el.classList.add('animate-fadeInUp');
+      });
+    });
+    
+    // Add keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    });
+    
+    // Add touch gestures for mobile
+    let touchStartY = 0;
+    document.addEventListener('touchstart', (e) => {
+      touchStartY = e.touches[0].clientY;
+    });
+    
+    document.addEventListener('touchmove', (e) => {
+      if (!mobileMenu.classList.contains('active')) return;
       
-      // Animate header on page load
-      const header = document.querySelector('header');
-      setTimeout(() => {
-        header.classList.remove('js-hidden');
-        header.classList.add('animate-fadeInUp');
-      }, 300);
+      const touchY = e.touches[0].clientY;
+      const diff = touchStartY - touchY;
       
-      // Animate hero section
-      const hero = document.querySelector('.hero-section');
-      setTimeout(() => {
-        hero.classList.remove('js-hidden');
-        hero.classList.add('animate-fadeInUp');
-      }, 500);
+      if (diff > 50) { // Swipe up to close
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
     });
   </script>
 </body>
-
 </html>
