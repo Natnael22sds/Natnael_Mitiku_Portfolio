@@ -76,6 +76,29 @@ footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:2rem
 .rv.v{opacity:1;transform:none}
 #top{position:fixed;right:1.25rem;bottom:calc(1.25rem + env(safe-area-inset-bottom,0px));width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--txt);cursor:pointer;display:none;z-index:60}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+.featgrid{display:grid;gap:1.25rem;margin-top:2rem}
+.feat{display:grid;grid-template-columns:1.4fr 1fr;gap:1.5rem;padding:2rem;background:linear-gradient(135deg,rgba(139,92,246,.1),var(--card) 55%)}
+.feat h3{font-size:1.6rem;margin:.6rem 0 .3rem}
+.feat .sub{color:var(--p);font-weight:600;font-size:.9rem}
+.feat ul{list-style:none;margin-top:.5rem}
+.feat li{color:var(--mut);font-size:.9rem;padding:.3rem 0 .3rem 1.3rem;position:relative}
+.feat li:before{content:"▹";position:absolute;left:0;color:var(--p)}
+.badge{display:inline-block;font-size:.7rem;padding:.2rem .7rem;border-radius:999px;background:linear-gradient(135deg,var(--p),var(--s));color:#fff;font-weight:600}
+.sech{margin-top:4rem;font-size:1.3rem;font-weight:700}
+@media(max-width:800px){.feat{grid-template-columns:1fr;padding:1.5rem}}
+.hgrid{display:grid;grid-template-columns:1.15fr .85fr;gap:3rem;align-items:center}
+.term{background:#0b0b10;border:1px solid rgba(139,92,246,.35);border-radius:1.1rem;box-shadow:0 30px 60px -20px rgba(139,92,246,.45);overflow:hidden;animation:fl 6s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-14px)}}
+.term .bar{display:flex;gap:6px;padding:.8rem 1rem;border-bottom:1px solid rgba(255,255,255,.08)}
+.term .bar i{width:11px;height:11px;border-radius:50%;background:#ef4444}.term .bar i:nth-child(2){background:#f59e0b}.term .bar i:nth-child(3){background:#22c55e}
+.term pre{padding:1.2rem 1.3rem;font:.82rem/1.8 'JetBrains Mono',monospace;color:#d4d4d8;overflow-x:auto}
+.k{color:#c084fc}.v{color:#fcd34d}.c{color:#6b7280}.g{color:#4ade80}
+@media(max-width:900px){.hgrid{grid-template-columns:1fr}}
+.feat{border-color:rgba(139,92,246,.3)}
+.feat:before{content:"";position:absolute;inset:0;background:radial-gradient(500px circle at 100% 0,rgba(139,92,246,.18),transparent 60%);pointer-events:none}
+.feat>*{position:relative}
+.feat .n{position:absolute;right:1.5rem;top:1rem;font-size:3.5rem;font-weight:800;color:rgba(139,92,246,.12);line-height:1}
+.feat .tag{transition:.2s}.feat .tag:hover{background:var(--p);color:#fff}
 </style>
 </head>
 <body>
@@ -87,17 +110,26 @@ footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:2rem
   <div><a href="mailto:mitikunathan@gmail.com" class="btn pri">Hire Me</a><button id="tg" aria-label="Toggle theme">◐</button></div>
 </div></nav>
 
-<header id="home" class="hero"><div class="wrap">
+<header id="home" class="hero"><div class="wrap hgrid"><div>
   <span class="pill"><i class="dot"></i> Available for freelance &amp; full-time</span>
   <h1>Hi, I'm <span class="grad">Natnael</span>.<br>I build <span class="grad" id="typed"></span><span class="cur"></span></h1>
-  <p class="lead">Full-stack developer from Ethiopia crafting fast, scalable web apps with Vue/Nuxt, Next.js, NestJS and PostgreSQL.</p>
+  <p class="lead">Full-stack developer from Ethiopia crafting fast, scalable web apps with Next.js, Nuxt, NestJS and PostgreSQL — from Stripe-powered booking platforms to video consultation apps.</p>
   <div class="row"><a href="#projects" class="btn pri">View My Work</a><a href="Resumes.pdf" class="btn">Download Resume ↓</a></div>
   <div class="soc">
     <a href="https://github.com/Natnael22sds" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.1-1.47-1.1-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.9.83.09-.64.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.1.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg></a>
     <a href="https://www.linkedin.com/in/natnael-mitiku-b080321b7/" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.600h.1c.5-1 1.800-2 3.800-2 4 0 4.800 2.600 4.800 6V21h-4v-5c0-1.200 0-2.800-1.700-2.800s-2 1.300-2 2.700V21h-4z"/></svg></a>
     <a href="mailto:mitikunathan@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 7L4 7v1.500l8 5 8-5V7z"/></svg></a>
   </div>
-</div></header>
+</div><div class="term rv"><div class="bar"><i></i><i></i><i></i></div><pre><span class="c">// natnael.ts</span>
+<span class="k">const</span> developer = {
+  name: <span class="v">"Natnael Mitiku"</span>,
+  role: <span class="v">"Full-Stack Developer"</span>,
+  from: <span class="v">"Ethiopia 🇪🇹"</span>,
+  stack: [<span class="v">"Next.js"</span>, <span class="v">"NestJS"</span>,
+          <span class="v">"PostgreSQL"</span>, <span class="v">"Stripe"</span>],
+  shipped: <span class="g">"production apps"</span>,
+  available: <span class="k">true</span>
+};</pre></div></div></header>
 
 <div class="marq"><div class="track" id="track"></div></div>
 
@@ -105,10 +137,10 @@ footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:2rem
   <p class="eyebrow mono rv">// about</p><h2 class="rv">Engineering with <span class="grad">intent</span></h2>
   <div class="bento">
     <div class="card span2 rv"><p>I blend robust backend architecture with polished frontends. I care about clean code, performance and the details users feel — whether it's an e-commerce platform, a real-time dashboard or an AI-powered SaaS.</p><div class="tags"><span class="tag">Clean Code</span><span class="tag">Performance</span><span class="tag">Scalable APIs</span><span class="tag">UX Detail</span></div></div>
-    <div class="card rv"><div class="num grad" data-n="6">0</div><p class="mut">Featured projects</p></div>
+    <div class="card rv"><div class="num grad" data-n="10">0</div><p class="mut">Projects built</p></div>
     <div class="card rv"><div class="num grad" data-n="8">0</div><p class="mut">Core technologies</p></div>
     <div class="card rv"><div class="num">🇪🇹</div><p class="mut">Based in Ethiopia, working globally</p></div>
-    <div class="card span2 rv"><p class="mono mut">$ currently exploring</p><p style="margin-top:.4rem">Next.js 14 · NestJS microservices · AI-powered features · Docker</p></div>
+    <div class="card span2 rv"><p class="mono mut">$ currently exploring</p><p style="margin-top:.4rem">Next.js · NestJS microservices · AI-powered features · Docker</p></div>
     <div class="card rv"><div class="num">24/7</div><p class="mut">Learning mindset</p></div>
   </div>
 </div></section>
@@ -117,13 +149,40 @@ footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:2rem
   <p class="eyebrow mono rv">// stack</p><h2 class="rv">Tech <span class="grad">Arsenal</span></h2>
   <div class="grid3" style="margin-top:2rem">
     <div class="card rv"><div class="ico">🖥</div><h3 style="margin:.8rem 0 .2rem">Frontend</h3><p class="mut">Interfaces that feel instant.</p><div class="tags"><span class="tag">Vue</span><span class="tag">Nuxt</span><span class="tag">React</span><span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">Tailwind</span></div></div>
-    <div class="card rv"><div class="ico">⚙️</div><h3 style="margin:.8rem 0 .2rem">Backend</h3><p class="mut">Secure, structured, scalable.</p><div class="tags"><span class="tag">Node.js</span><span class="tag">NestJS</span><span class="tag">PHP</span><span class="tag">Laravel</span><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">GraphQL</span></div></div>
-    <div class="card rv"><div class="ico">🗄</div><h3 style="margin:.8rem 0 .2rem">Data &amp; DevOps</h3><p class="mut">Reliable data, smooth delivery.</p><div class="tags"><span class="tag">PostgreSQL</span><span class="tag">MySQL</span><span class="tag">Prisma</span><span class="tag">Docker</span><span class="tag">Git</span></div></div>
+    <div class="card rv"><div class="ico">⚙️</div><h3 style="margin:.8rem 0 .2rem">Backend</h3><p class="mut">Secure, structured, scalable.</p><div class="tags"><span class="tag">Node.js</span><span class="tag">NestJS</span><span class="tag">PHP</span><span class="tag">Laravel</span><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Express</span><span class="tag">NextAuth</span><span class="tag">GraphQL</span></div></div>
+    <div class="card rv"><div class="ico">🗄</div><h3 style="margin:.8rem 0 .2rem">Data &amp; DevOps</h3><p class="mut">Reliable data, smooth delivery.</p><div class="tags"><span class="tag">PostgreSQL</span><span class="tag">MySQL</span><span class="tag">Prisma</span><span class="tag">Supabase</span><span class="tag">Stripe</span><span class="tag">Vercel</span><span class="tag">Railway</span><span class="tag">Cloudflare</span><span class="tag">Docker</span><span class="tag">Git</span></div></div>
   </div>
 </div></section>
 
 <section id="projects"><div class="wrap">
   <p class="eyebrow mono rv">// work</p><h2 class="rv">Featured <span class="grad">Innovations</span></h2>
+  <div class="featgrid">
+    <article class="card feat rv"><span class="n">01</span>
+      <div><span class="badge">Production · Halifax, NS</span><h3>NovaRide</h3><p class="sub">Premium Taxi &amp; Limo Booking Platform</p>
+      <p class="mut" style="margin-top:.8rem">A full-stack booking platform for customers in Halifax, Nova Scotia. I developed and deployed the entire system: responsive customer site, production API, database, authentication and payments.</p>
+      <div class="tags"><span class="tag">Next.js</span><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">PostgreSQL</span><span class="tag">Prisma</span><span class="tag">Supabase</span><span class="tag">Stripe</span><span class="tag">Vercel</span><span class="tag">Railway</span><span class="tag">Cloudflare</span></div></div>
+      <ul><li>Online ride booking</li><li>Fare management</li><li>Stripe payment processing</li><li>Driver assignment</li><li>Admin management dashboard</li><li>Role-based authentication</li><li>Deployed on Vercel, Railway, Supabase &amp; Cloudflare</li></ul>
+    </article>
+    <article class="card feat rv"><span class="n">02</span>
+      <div><span class="badge">Frontend &amp; API Integration</span><h3>Megeb+</h3><p class="sub">Nutrition &amp; Consultation Platform</p>
+      <p class="mut" style="margin-top:.8rem">A wellness platform connecting clients with nutrition professionals and managing the whole consultation journey digitally. I worked primarily on the frontend and on integrating the backend APIs for dynamic data and user interactions.</p>
+      <div class="tags"><span class="tag">Next.js</span><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Tailwind CSS</span><span class="tag">Axios</span><span class="tag">REST APIs</span><span class="tag">NextAuth</span><span class="tag">Jitsi</span></div></div>
+      <ul><li>Authentication &amp; user profiles</li><li>Nutritionist and client workflows</li><li>Appointment scheduling</li><li>Video consultations (Jitsi)</li><li>Nutrition plans</li><li>Role-based experiences</li></ul>
+    </article>
+    <article class="card feat rv"><span class="n">03</span>
+      <div><span class="badge">Product</span><h3>Digital Business Card Platform</h3><p class="sub">Your online identity in one link</p>
+      <p class="mut" style="margin-top:.8rem">A modern digital business card solution that lets businesses and professionals build an online identity and share it with customers through a single link or QR code, with a professional presence and no traditional website needed.</p>
+      <div class="tags"><span class="tag">QR Code Sharing</span><span class="tag">Shareable Link</span><span class="tag">Online Identity</span></div></div>
+      <ul><li>One link, one QR code</li><li>Professional presence without a website</li><li>Easy to share with customers</li></ul>
+    </article>
+    <article class="card feat rv"><span class="n">04</span>
+      <div><span class="badge">Customizable Systems</span><h3>Appointment &amp; Booking Systems</h3><p class="sub">Built for clinics, salons and beauty businesses</p>
+      <p class="mut" style="margin-top:.8rem">Customizable appointment management systems for businesses such as dental clinics, skincare businesses and nail salons. Each one gives the business a centralized digital platform to manage services, appointments, customer information and scheduling.</p>
+      <div class="tags"><span class="tag">Dental Clinics</span><span class="tag">Skincare Businesses</span><span class="tag">Nail Salons</span><span class="tag">Scheduling</span><span class="tag">Customizable</span></div></div>
+      <ul><li>Service management</li><li>Appointment booking &amp; scheduling</li><li>Customer information management</li><li>One centralized platform</li><li>Tailored to each business</li></ul>
+    </article>
+  </div>
+  <h3 class="sech rv">More projects</h3>
   <div class="filters" id="filters"><button class="f on" data-f="all">All</button><button class="f" data-f="web">Web</button><button class="f" data-f="mobile">Mobile</button><button class="f" data-f="ai">AI / Data</button></div>
   <div class="grid3">
     <div class="card proj rv" data-c="web"><div class="ico">🛒</div><h3>NexaMart</h3><p class="mut">Full-stack e-commerce with cart, auth, Stripe payments and an admin dashboard.</p><div class="tags"><span class="tag">Next.js</span><span class="tag">NestJS</span><span class="tag">Prisma</span><span class="tag">PostgreSQL</span></div></div>
@@ -168,7 +227,7 @@ let wi=0,ci=0,del=false;const t=document.getElementById('typed');
  if(del&&ci===0){del=false;wi=(wi+1)%words.length}
  ci+=del?-1:1;setTimeout(type,del?35:70)})();
 // marquee
-const tech=['Vue.js','Nuxt','React','Next.js','TypeScript','Node.js','NestJS','PostgreSQL','Prisma','Tailwind','Laravel','FastAPI','Docker'];
+const tech=['Vue.js','Nuxt','React','Next.js','TypeScript','Node.js','NestJS','PostgreSQL','Prisma','Tailwind','Laravel','FastAPI','Express','Supabase','Stripe','Vercel','Railway','Cloudflare','Docker'];
 document.getElementById('track').innerHTML=[...tech,...tech].map(x=>'<span>✦ '+x+'</span>').join('');
 // cursor glow
 const g=document.getElementById('glow');
