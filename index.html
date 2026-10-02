@@ -99,6 +99,10 @@ footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:2rem
 .feat>*{position:relative}
 .feat .n{position:absolute;right:1.5rem;top:1rem;font-size:3.5rem;font-weight:800;color:rgba(139,92,246,.12);line-height:1}
 .feat .tag{transition:.2s}.feat .tag:hover{background:var(--p);color:#fff}
+.tline{display:block;height:1.25em;line-height:1.25;font-size:.6em;white-space:nowrap;overflow:hidden;margin-top:.15em}
+.hero h1{min-height:calc(2.1em + 1.4em)}
+html,body{overflow-anchor:none}
+@keyframes fl{50%{transform:translateY(-6px)}}
 </style>
 </head>
 <body>
@@ -112,7 +116,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:2rem
 
 <header id="home" class="hero"><div class="wrap hgrid"><div>
   <span class="pill"><i class="dot"></i> Available for freelance &amp; full-time</span>
-  <h1>Hi, I'm <span class="grad">Natnael</span>.<br>I build <span class="grad" id="typed"></span><span class="cur"></span></h1>
+  <h1>Hi, I'm <span class="grad">Natnael</span>.<br>I build<span class="tline"><span class="grad" id="typed">&nbsp;</span><span class="cur"></span></span></h1>
   <p class="lead">Full-stack developer from Ethiopia crafting fast, scalable web apps with Next.js, Nuxt, NestJS and PostgreSQL — from Stripe-powered booking platforms to video consultation apps.</p>
   <div class="row"><a href="#projects" class="btn pri">View My Work</a><a href="Resumes.pdf" class="btn">Download Resume ↓</a></div>
   <div class="soc">
