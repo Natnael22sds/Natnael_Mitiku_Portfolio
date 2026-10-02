@@ -1,342 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Natnael Mitiku | Full-Stack Architect</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #8B5CF6;
-      --secondary: #3B82F6;
-      --accent: #F59E0B;
-      --dark: #0F172A;
-      --light: #F8FAFC;
-      --grad-1: linear-gradient(135deg, #8B5CF6, #3B82F6, #06B6D4);
-    }
-    
-    * { font-family: 'Inter', sans-serif; margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; overflow-x: hidden; }
-    body {
-      background: radial-gradient(circle at 10% 20%, #0F172A, #020617);
-      color: var(--light);
-      overflow-x: hidden;
-    }
-    
-    /* Enhanced Animations */
-    @keyframes float {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-25px) rotate(2deg); }
-    }
-    @keyframes shimmer {
-      0% { background-position: -200% center; }
-      100% { background-position: 200% center; }
-    }
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    @keyframes slideUp {
-      from { transform: translateY(60px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    @keyframes glowPulse {
-      0% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4); }
-      70% { box-shadow: 0 0 0 20px rgba(139, 92, 246, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); }
-    }
-    
-    .animate-float { animation: float 7s ease-in-out infinite; }
-    .animate-gradient-bg { background: linear-gradient(-45deg, var(--primary), var(--secondary), var(--accent), #06B6D4); background-size: 400% 400%; animation: gradientShift 12s ease infinite; }
-    .glass-premium {
-      background: rgba(15, 25, 45, 0.6);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(139, 92, 246, 0.2);
-      border-radius: 1.5rem;
-    }
-    .glass-card {
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-    }
-    .glass-card:hover {
-      border-color: var(--primary);
-      transform: translateY(-8px);
-      box-shadow: 0 25px 35px -12px rgba(139, 92, 246, 0.3);
-    }
-    .gradient-text {
-      background: linear-gradient(120deg, #C084FC, #60A5FA, #FCD34D);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .btn-glow {
-      transition: all 0.3s;
-    }
-    .btn-glow:hover {
-      box-shadow: 0 0 20px var(--primary);
-      transform: scale(1.03);
-    }
-    .skill-badge {
-      background: linear-gradient(145deg, rgba(139,92,246,0.2), rgba(59,130,246,0.1));
-      border: 1px solid rgba(139,92,246,0.3);
-      transition: all 0.2s;
-    }
-    .skill-badge:hover {
-      border-color: var(--primary);
-      background: rgba(139,92,246,0.25);
-      transform: translateY(-2px);
-    }
-    .project-card-modern {
-      background: rgba(10, 20, 35, 0.7);
-      backdrop-filter: blur(12px);
-      border-radius: 1.75rem;
-      border: 1px solid rgba(139, 92, 246, 0.2);
-      transition: all 0.4s ease;
-    }
-    .project-card-modern:hover {
-      border-color: var(--primary);
-      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.5), 0 0 0 1px rgba(139,92,246,0.2);
-    }
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: #0F172A; }
-    ::-webkit-scrollbar-thumb { background: linear-gradient(var(--primary), var(--secondary)); border-radius: 10px; }
-    
-    @media (max-width: 768px) {
-      .container-pad { padding-left: 1.25rem; padding-right: 1.25rem; }
-    }
-    .animate-on-scroll { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1); }
-    .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#050505">
+<title>Natnael Mitiku | Full-Stack Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050505;--card:#0d0d12;--line:rgba(255,255,255,.08);--txt:#f4f4f5;--mut:#9ca3af;--p:#8b5cf6;--s:#3b82f6;--a:#f59e0b;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root:not([data-theme="dark"]):not([data-theme="light"]){}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#fafafa;--card:#fff;--line:rgba(0,0,0,.1);--txt:#111827;--mut:#4b5563}}
+:root[data-theme="light"]{--bg:#fafafa;--card:#fff;--line:rgba(0,0,0,.1);--txt:#111827;--mut:#4b5563}
+:root[data-theme="dark"]{--bg:#050505;--card:#0d0d12;--line:rgba(255,255,255,.08);--txt:#f4f4f5;--mut:#9ca3af}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:calc(80px + env(safe-area-inset-top,0px))}
+body{background:var(--bg);color:var(--txt);font-family:'Inter',system-ui,sans-serif;line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+.grad{background:linear-gradient(120deg,#c084fc,#60a5fa,#fcd34d);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.mono{font-family:'JetBrains Mono',monospace}
+#glow{position:fixed;width:500px;height:500px;border-radius:50%;pointer-events:none;z-index:0;background:radial-gradient(circle,rgba(139,92,246,.16),transparent 65%);transform:translate(-50%,-50%);left:50%;top:30%}
+#prog{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--p),var(--s),var(--a));z-index:100}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--bg) 80%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-weight:800;font-size:1.35rem}
+.links{display:flex;gap:1.75rem;font-size:.9rem;color:var(--mut)}
+.links a:hover,.links a.on{color:var(--txt)}
+.btn{display:inline-block;padding:.7rem 1.5rem;border-radius:999px;font-weight:600;font-size:.9rem;transition:.25s;border:1px solid var(--line)}
+.btn.pri{background:linear-gradient(135deg,var(--p),var(--s));border:0;color:#fff}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(139,92,246,.35)}
+#tg{background:none;border:1px solid var(--line);color:var(--txt);width:36px;height:36px;border-radius:50%;cursor:pointer;margin-left:.75rem}
+@media(max-width:700px){.links{display:none}}
+section{position:relative;z-index:1;padding:6rem 0}
+h2{font-size:clamp(2rem,5vw,3rem);font-weight:800;letter-spacing:-.02em;margin-bottom:.5rem}
+.eyebrow{color:var(--p);font-size:.85rem;margin-bottom:.5rem}
+.hero{min-height:92vh;display:flex;align-items:center;padding-top:3rem}
+.hero h1{font-size:clamp(2.6rem,7vw,5rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;margin:1rem 0}
+.hero p.lead{color:var(--mut);font-size:1.15rem;max-width:560px;margin-bottom:2rem}
+.pill{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem 1rem;border-radius:999px;border:1px solid var(--line);background:var(--card);font-size:.8rem}
+.dot{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 0 #22c55e;animation:pl 2s infinite}
+@keyframes pl{70%{box-shadow:0 0 0 10px transparent}}
+.cur{display:inline-block;width:3px;height:1em;background:var(--p);margin-left:3px;animation:bl 1s steps(1) infinite;vertical-align:-.1em}
+@keyframes bl{50%{opacity:0}}
+.row{display:flex;gap:1rem;flex-wrap:wrap}
+.soc{display:flex;gap:.75rem;margin-top:2rem}
+.soc a{width:44px;height:44px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;background:var(--card);transition:.25s}
+.soc a:hover{border-color:var(--p);transform:translateY(-3px)}
+.soc svg{width:20px;height:20px;fill:currentColor}
+.marq{overflow:hidden;border-block:1px solid var(--line);padding:1rem 0;position:relative;z-index:1}
+.track{display:flex;gap:3rem;width:max-content;animation:mq 30s linear infinite;color:var(--mut);font-weight:600;white-space:nowrap}
+@keyframes mq{to{transform:translateX(-50%)}}
+.bento{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.5rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:1.25rem;padding:1.5rem;transition:.3s;position:relative;overflow:hidden}
+.card:hover{border-color:var(--p);transform:translateY(-5px);box-shadow:0 20px 40px -20px rgba(139,92,246,.4)}
+.span2{grid-column:span 2}
+.num{font-size:2.5rem;font-weight:800}
+.mut{color:var(--mut);font-size:.9rem}
+@media(max-width:800px){.bento{grid-template-columns:1fr 1fr}.span2{grid-column:span 2}}
+.tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.tag{font-size:.75rem;padding:.25rem .7rem;border-radius:999px;background:rgba(139,92,246,.14);border:1px solid rgba(139,92,246,.3)}
+.filters{display:flex;gap:.5rem;flex-wrap:wrap;margin:1.5rem 0 2rem}
+.f{background:var(--card);border:1px solid var(--line);color:var(--mut);padding:.5rem 1.1rem;border-radius:999px;cursor:pointer;font:inherit;font-size:.85rem;transition:.2s}
+.f.on,.f:hover{background:var(--p);color:#fff;border-color:var(--p)}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem}
+.proj h3{font-size:1.2rem;margin:.9rem 0 .4rem}
+.ico{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-size:1.4rem;background:rgba(139,92,246,.15)}
+.proj.hide{display:none}
+.tl{border-left:2px solid var(--line);margin-top:2rem;padding-left:1.5rem}
+.tl div{position:relative;margin-bottom:1.75rem}
+.tl div:before{content:"";position:absolute;left:-1.95rem;top:.5rem;width:12px;height:12px;border-radius:50%;background:var(--p)}
+.ct{text-align:center}
+.ct .grid3{margin-top:2.5rem;text-align:center}
+footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:2rem 0;text-align:center;color:var(--mut);font-size:.85rem}
+.rv{opacity:0;transform:translateY(32px);transition:.8s cubic-bezier(.2,.9,.3,1)}
+.rv.v{opacity:1;transform:none}
+#top{position:fixed;right:1.25rem;bottom:calc(1.25rem + env(safe-area-inset-bottom,0px));width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--txt);cursor:pointer;display:none;z-index:60}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
 </head>
-<body class="overflow-x-hidden">
+<body>
+<div id="prog"></div><div id="glow"></div>
 
-  <!-- Animated orbs -->
-  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
-    <div class="absolute top-20 left-[10%] w-72 h-72 bg-purple-600/10 rounded-full blur-3xl animate-float"></div>
-    <div class="absolute bottom-20 right-[5%] w-96 h-96 bg-blue-600/10 rounded-full blur-3xl animate-float" style="animation-delay: -3s"></div>
-    <div class="absolute top-1/2 left-1/3 w-64 h-64 bg-amber-500/5 rounded-full blur-2xl animate-float" style="animation-delay: -5s"></div>
+<nav><div class="wrap">
+  <a href="#home" class="logo"><span class="grad">NM</span>.</a>
+  <div class="links"><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#journey">Journey</a><a href="#contact">Contact</a></div>
+  <div><a href="mailto:mitikunathan@gmail.com" class="btn pri">Hire Me</a><button id="tg" aria-label="Toggle theme">◐</button></div>
+</div></nav>
+
+<header id="home" class="hero"><div class="wrap">
+  <span class="pill"><i class="dot"></i> Available for freelance &amp; full-time</span>
+  <h1>Hi, I'm <span class="grad">Natnael</span>.<br>I build <span class="grad" id="typed"></span><span class="cur"></span></h1>
+  <p class="lead">Full-stack developer from Ethiopia crafting fast, scalable web apps with Vue/Nuxt, Next.js, NestJS and PostgreSQL.</p>
+  <div class="row"><a href="#projects" class="btn pri">View My Work</a><a href="Resumes.pdf" class="btn">Download Resume ↓</a></div>
+  <div class="soc">
+    <a href="https://github.com/Natnael22sds" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.1-1.47-1.1-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.9.83.09-.64.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.1.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg></a>
+    <a href="https://www.linkedin.com/in/natnael-mitiku-b080321b7/" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.600h.1c.5-1 1.800-2 3.800-2 4 0 4.800 2.600 4.800 6V21h-4v-5c0-1.200 0-2.800-1.700-2.800s-2 1.300-2 2.700V21h-4z"/></svg></a>
+    <a href="mailto:mitikunathan@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 7L4 7v1.500l8 5 8-5V7z"/></svg></a>
   </div>
+</div></header>
 
-  <!-- Navbar Glass -->
-  <nav class="fixed top-0 w-full z-50 bg-[#0F172A]/80 backdrop-blur-xl border-b border-white/10 py-3">
-    <div class="container mx-auto px-6 flex justify-between items-center">
-      <div class="text-2xl font-extrabold tracking-tight">
-        <span class="gradient-text">NM</span><span class="text-white">.</span>
-      </div>
-      <div class="hidden md:flex space-x-8 font-medium">
-        <a href="#home" class="hover:text-purple-400 transition-colors">Home</a>
-        <a href="#about" class="hover:text-purple-400 transition-colors">About</a>
-        <a href="#skills" class="hover:text-purple-400 transition-colors">Skills</a>
-        <a href="#projects" class="hover:text-purple-400 transition-colors">Projects</a>
-        <a href="#contact" class="hover:text-purple-400 transition-colors">Contact</a>
-      </div>
-      <a href="mailto:mitikunathan@gmail.com" class="hidden md:block px-5 py-2 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:shadow-[0_0_18px_#8B5CF6] transition-all duration-300 text-sm font-semibold">Hire Me</a>
-      <button id="mobileBtn" class="md:hidden text-2xl"><i class="fas fa-bars"></i></button>
-    </div>
-    <div id="mobileMenu" class="fixed top-0 right-0 h-full w-64 bg-[#0F172A]/95 backdrop-blur-xl border-l border-white/10 transform translate-x-full transition-transform duration-300 z-50 p-6">
-      <button id="closeMobile" class="absolute top-5 right-5 text-2xl"><i class="fas fa-times"></i></button>
-      <div class="flex flex-col gap-6 mt-16">
-        <a href="#home" class="text-lg">Home</a><a href="#about" class="text-lg">About</a><a href="#skills" class="text-lg">Skills</a><a href="#projects" class="text-lg">Projects</a><a href="#contact" class="text-lg">Contact</a>
-        <a href="mailto:mitikunathan@gmail.com" class="mt-4 bg-purple-600 text-center py-2 rounded-full">Hire Me</a>
-      </div>
-    </div>
-  </nav>
+<div class="marq"><div class="track" id="track"></div></div>
 
-  <!-- Hero Section -->
-  <section id="home" class="min-h-screen flex items-center relative pt-24">
-    <div class="container mx-auto px-6">
-      <div class="grid lg:grid-cols-2 gap-12 items-center">
-        <div class="animate-on-scroll">
-          <div class="inline-flex px-4 py-1.5 rounded-full bg-purple-500/20 border border-purple-400/30 mb-6">
-            <span class="text-sm font-semibold gradient-text">⚡ Full-Stack Engineer</span>
-          </div>
-          <h1 class="text-5xl lg:text-7xl font-bold leading-tight mb-5">Crafting <span class="gradient-text">Digital Excellence</span> Beyond Limits</h1>
-          <p class="text-gray-300 text-lg mb-8">I architect scalable, high-performance web apps with modern stacks — from Vue/Nuxt to Next.js, NestJS, and PostgreSQL. Turning complex ideas into smooth digital realities.</p>
-          <div class="flex flex-wrap gap-4">
-            <a href="#contact" class="px-8 py-3 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 font-semibold btn-glow">Let's Connect</a>
-            <a href="Resumes.pdf" class="px-8 py-3 rounded-full glass-premium font-semibold hover:border-purple-400 transition">Resume <i class="fas fa-download ml-1"></i></a>
-          </div>
-          <div class="flex gap-5 mt-10">
-            <a href="https://github.com/Natnael22sds" class="w-11 h-11 rounded-full glass-premium flex items-center justify-center hover:scale-110 transition"><i class="fab fa-github text-xl"></i></a>
-            <a href="https://www.linkedin.com/in/natnael-mitiku-b080321b7/" class="w-11 h-11 rounded-full glass-premium flex items-center justify-center hover:scale-110 transition"><i class="fab fa-linkedin text-xl"></i></a>
-            <a href="#" class="w-11 h-11 rounded-full glass-premium flex items-center justify-center hover:scale-110 transition"><i class="fab fa-x-twitter text-xl"></i></a>
-          </div>
-        </div>
-        <div class="relative flex justify-center animate-float">
-          <div class="w-72 h-72 md:w-96 md:h-96 rounded-full animate-gradient-bg flex items-center justify-center p-1">
-            <div class="w-full h-full rounded-full bg-dark/80 flex items-center justify-center backdrop-blur-sm">
-              <i class="fas fa-laptop-code text-7xl gradient-text"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"><a href="#about"><i class="fas fa-chevron-down text-purple-400 text-xl"></i></a></div>
-  </section>
+<section id="about"><div class="wrap">
+  <p class="eyebrow mono rv">// about</p><h2 class="rv">Engineering with <span class="grad">intent</span></h2>
+  <div class="bento">
+    <div class="card span2 rv"><p>I blend robust backend architecture with polished frontends. I care about clean code, performance and the details users feel — whether it's an e-commerce platform, a real-time dashboard or an AI-powered SaaS.</p><div class="tags"><span class="tag">Clean Code</span><span class="tag">Performance</span><span class="tag">Scalable APIs</span><span class="tag">UX Detail</span></div></div>
+    <div class="card rv"><div class="num grad" data-n="6">0</div><p class="mut">Featured projects</p></div>
+    <div class="card rv"><div class="num grad" data-n="8">0</div><p class="mut">Core technologies</p></div>
+    <div class="card rv"><div class="num">🇪🇹</div><p class="mut">Based in Ethiopia, working globally</p></div>
+    <div class="card span2 rv"><p class="mono mut">$ currently exploring</p><p style="margin-top:.4rem">Next.js 14 · NestJS microservices · AI-powered features · Docker</p></div>
+    <div class="card rv"><div class="num">24/7</div><p class="mut">Learning mindset</p></div>
+  </div>
+</div></section>
 
-  <!-- About -->
-  <section id="about" class="py-24 relative">
-    <div class="container mx-auto px-6">
-      <div class="text-center mb-14"><h2 class="text-4xl md:text-5xl font-bold mb-4">About <span class="gradient-text">Me</span></h2><div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto rounded-full"></div></div>
-      <div class="grid lg:grid-cols-2 gap-12">
-        <div class="glass-premium p-8 rounded-3xl">
-          <p class="text-gray-200 text-lg leading-relaxed mb-5">I'm Natnael Mitiku, a passionate Full-Stack Developer from Ethiopia with a mission to build high-impact applications. I blend robust backend architectures with elegant frontends, using modern frameworks like <strong class="text-purple-300">Next.js, Nuxt, NestJS</strong> and databases <strong class="text-blue-300">PostgreSQL, Prisma ORM</strong>.</p>
-          <p class="text-gray-200 leading-relaxed">I believe in clean code, performance, and user delight. Whether it's an AI-powered SaaS or a real-time dashboard, I deliver solutions that scale.</p>
-        </div>
-        <div class="grid grid-cols-2 gap-5">
-          <div class="glass-card p-5 rounded-2xl text-center"><i class="fas fa-code text-3xl text-purple-400 mb-2"></i><h4 class="font-bold">50+</h4><p class="text-gray-400 text-sm">Projects Delivered</p></div>
-          <div class="glass-card p-5 rounded-2xl text-center"><i class="fas fa-users text-3xl text-blue-400 mb-2"></i><h4 class="font-bold">15+</h4><p class="text-gray-400 text-sm">Happy Clients</p></div>
-          <div class="glass-card p-5 rounded-2xl text-center"><i class="fas fa-cloud-upload-alt text-3xl text-cyan-400 mb-2"></i><h4 class="font-bold">98%</h4><p class="text-gray-400 text-sm">Performance Score</p></div>
-          <div class="glass-card p-5 rounded-2xl text-center"><i class="fas fa-mobile-alt text-3xl text-amber-400 mb-2"></i><h4 class="font-bold">100%</h4><p class="text-gray-400 text-sm">Responsive</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
+<section id="skills" style="background:color-mix(in srgb,var(--card) 50%,transparent)"><div class="wrap">
+  <p class="eyebrow mono rv">// stack</p><h2 class="rv">Tech <span class="grad">Arsenal</span></h2>
+  <div class="grid3" style="margin-top:2rem">
+    <div class="card rv"><div class="ico">🖥</div><h3 style="margin:.8rem 0 .2rem">Frontend</h3><p class="mut">Interfaces that feel instant.</p><div class="tags"><span class="tag">Vue</span><span class="tag">Nuxt</span><span class="tag">React</span><span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">Tailwind</span></div></div>
+    <div class="card rv"><div class="ico">⚙️</div><h3 style="margin:.8rem 0 .2rem">Backend</h3><p class="mut">Secure, structured, scalable.</p><div class="tags"><span class="tag">Node.js</span><span class="tag">NestJS</span><span class="tag">PHP</span><span class="tag">Laravel</span><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">GraphQL</span></div></div>
+    <div class="card rv"><div class="ico">🗄</div><h3 style="margin:.8rem 0 .2rem">Data &amp; DevOps</h3><p class="mut">Reliable data, smooth delivery.</p><div class="tags"><span class="tag">PostgreSQL</span><span class="tag">MySQL</span><span class="tag">Prisma</span><span class="tag">Docker</span><span class="tag">Git</span></div></div>
+  </div>
+</div></section>
 
-  <!-- Skills (Enhanced with Next.js, Nest.js, PostgreSQL, Prisma, Nuxt) -->
-  <section id="skills" class="py-24 bg-[#0A0F1F]/40">
-    <div class="container mx-auto px-6">
-      <div class="text-center mb-14"><h2 class="text-4xl md:text-5xl font-bold mb-4">Tech Arsenal</h2><p class="text-gray-400 max-w-2xl mx-auto">Modern full-stack toolkit: cutting-edge frameworks, databases, and ORMs</p></div>
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- Frontend heavy -->
-        <div class="glass-card p-5 rounded-2xl"><div class="flex justify-between items-center mb-3"><i class="fab fa-vuejs text-3xl text-emerald-400"></i><span class="text-purple-300 font-bold">95%</span></div><h4 class="font-bold text-lg">Vue.js / Nuxt.js</h4><div class="w-full h-1.5 bg-gray-700 rounded-full mt-2"><div class="w-[95%] h-full bg-gradient-to-r from-purple-500 to-blue-500 rounded-full"></div></div></div>
-        <div class="glass-card p-5 rounded-2xl"><div class="flex justify-between items-center mb-3"><i class="fab fa-react text-3xl text-cyan-400"></i><span class="text-purple-300 font-bold">88%</span></div><h4 class="font-bold text-lg">React / Next.js</h4><div class="w-full h-1.5 bg-gray-700 rounded-full mt-2"><div class="w-[88%] h-full bg-gradient-to-r from-purple-500 to-blue-500 rounded-full"></div></div></div>
-        <div class="glass-card p-5 rounded-2xl"><div class="flex justify-between items-center mb-3"><i class="fab fa-js text-3xl text-yellow-400"></i><span class="text-purple-300 font-bold">92%</span></div><h4 class="font-bold text-lg">JavaScript/TypeScript</h4><div class="w-full h-1.5 bg-gray-700 rounded-full mt-2"><div class="w-[92%] h-full bg-gradient-to-r from-purple-500 to-blue-500 rounded-full"></div></div></div>
-        <div class="glass-card p-5 rounded-2xl"><div class="flex justify-between items-center mb-3"><i class="fab fa-node-js text-3xl text-green-500"></i><span class="text-purple-300 font-bold">86%</span></div><h4 class="font-bold text-lg">Node.js / NestJS</h4><div class="w-full h-1.5 bg-gray-700 rounded-full mt-2"><div class="w-[86%] h-full bg-gradient-to-r from-purple-500 to-blue-500 rounded-full"></div></div></div>
-        <div class="glass-card p-5 rounded-2xl"><div class="flex justify-between items-center mb-3"><i class="fas fa-database text-3xl text-sky-400"></i><span class="text-purple-300 font-bold">90%</span></div><h4 class="font-bold text-lg">PostgreSQL / Prisma</h4><div class="w-full h-1.5 bg-gray-700 rounded-full mt-2"><div class="w-[90%] h-full bg-gradient-to-r from-purple-500 to-blue-500 rounded-full"></div></div></div>
-        <div class="glass-card p-5 rounded-2xl"><div class="flex justify-between items-center mb-3"><i class="fab fa-php text-3xl text-indigo-400"></i><span class="text-purple-300 font-bold">91%</span></div><h4 class="font-bold text-lg">PHP / Laravel</h4><div class="w-full h-1.5 bg-gray-700 rounded-full mt-2"><div class="w-[91%] h-full bg-gradient-to-r from-purple-500 to-blue-500 rounded-full"></div></div></div>
-        <div class="glass-card p-5 rounded-2xl"><div class="flex justify-between items-center mb-3"><i class="fab fa-python text-3xl text-blue-400"></i><span class="text-purple-300 font-bold">85%</span></div><h4 class="font-bold text-lg">Python / FastAPI</h4><div class="w-full h-1.5 bg-gray-700 rounded-full mt-2"><div class="w-[85%] h-full bg-gradient-to-r from-purple-500 to-blue-500 rounded-full"></div></div></div>
-        <div class="glass-card p-5 rounded-2xl"><div class="flex justify-between items-center mb-3"><i class="fas fa-cloud text-3xl text-teal-400"></i><span class="text-purple-300 font-bold">82%</span></div><h4 class="font-bold text-lg">Docker / Git</h4><div class="w-full h-1.5 bg-gray-700 rounded-full mt-2"><div class="w-[82%] h-full bg-gradient-to-r from-purple-500 to-blue-500 rounded-full"></div></div></div>
-      </div>
-      <div class="flex flex-wrap justify-center gap-3 mt-10">
-        <span class="skill-badge px-4 py-2 rounded-full text-sm"><i class="fab fa-vuejs mr-1"></i> Nuxt.js</span>
-        <span class="skill-badge px-4 py-2 rounded-full text-sm"><i class="fab fa-react mr-1"></i> Next.js 14</span>
-        <span class="skill-badge px-4 py-2 rounded-full text-sm"><i class="fas fa-server mr-1"></i> NestJS</span>
-        <span class="skill-badge px-4 py-2 rounded-full text-sm"><i class="fas fa-database mr-1"></i> PostgreSQL</span>
-        <span class="skill-badge px-4 py-2 rounded-full text-sm"><i class="fas fa-tools mr-1"></i> Prisma ORM</span>
-        <span class="skill-badge px-4 py-2 rounded-full text-sm"><i class="fab fa-tailwind mr-1"></i> Tailwind CSS</span>
-        <span class="skill-badge px-4 py-2 rounded-full text-sm"><i class="fab fa-graphql mr-1"></i> GraphQL</span>
-      </div>
-    </div>
-  </section>
+<section id="projects"><div class="wrap">
+  <p class="eyebrow mono rv">// work</p><h2 class="rv">Featured <span class="grad">Innovations</span></h2>
+  <div class="filters" id="filters"><button class="f on" data-f="all">All</button><button class="f" data-f="web">Web</button><button class="f" data-f="mobile">Mobile</button><button class="f" data-f="ai">AI / Data</button></div>
+  <div class="grid3">
+    <div class="card proj rv" data-c="web"><div class="ico">🛒</div><h3>NexaMart</h3><p class="mut">Full-stack e-commerce with cart, auth, Stripe payments and an admin dashboard.</p><div class="tags"><span class="tag">Next.js</span><span class="tag">NestJS</span><span class="tag">Prisma</span><span class="tag">PostgreSQL</span></div></div>
+    <div class="card proj rv" data-c="web"><div class="ico">🎨</div><h3>CreatorsHub</h3><p class="mut">Creator platform with real-time notifications, SSR and JWT authentication.</p><div class="tags"><span class="tag">Nuxt 3</span><span class="tag">NestJS</span><span class="tag">WebSockets</span></div></div>
+    <div class="card proj rv" data-c="ai web"><div class="ico">📊</div><h3>InsightAI Analytics</h3><p class="mut">AI-driven KPI dashboard with real-time aggregation and role-based access.</p><div class="tags"><span class="tag">Next.js</span><span class="tag">Prisma</span><span class="tag">PostgreSQL</span></div></div>
+    <div class="card proj rv" data-c="web"><div class="ico">🏥</div><h3>MediCare Appointment</h3><p class="mut">Zocdoc-style booking with payments, email notifications and multi-role portals.</p><div class="tags"><span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">JavaScript</span></div></div>
+    <div class="card proj rv" data-c="web"><div class="ico">🍲</div><h3>FlavorVerse</h3><p class="mut">Recipe-sharing platform with likes, comments and JWT auth.</p><div class="tags"><span class="tag">Nuxt</span><span class="tag">Node.js</span><span class="tag">PostgreSQL</span></div></div>
+    <div class="card proj rv" data-c="mobile"><div class="ico">🚗</div><h3>DriveEV Mobile</h3><p class="mut">Vehicle configurator and booking flow with push notifications.</p><div class="tags"><span class="tag">React Native</span><span class="tag">NestJS</span><span class="tag">Prisma</span></div></div>
+  </div>
+  <div style="text-align:center;margin-top:2.5rem"><a class="btn" href="https://github.com/Natnael22sds">Explore more on GitHub →</a></div>
+</div></section>
 
-  <!-- Projects Section (featuring new tech: Next.js, NestJS, Prisma, PostgreSQL, Nuxt) -->
-  <section id="projects" class="py-24">
-    <div class="container mx-auto px-6">
-      <div class="text-center mb-14"><h2 class="text-4xl md:text-5xl font-bold mb-4">Featured <span class="gradient-text">Innovations</span></h2><p class="text-gray-400 max-w-2xl mx-auto">Real-world solutions with Next.js, NestJS, Prisma, Nuxt & more</p></div>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        
-        <!-- Project 1: Next.js + Prisma + PostgreSQL E-commerce -->
-        <div class="project-card-modern p-6 group">
-          <div class="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center mb-5"><i class="fab fa-nextjs text-2xl text-white"></i></div>
-          <h3 class="text-xl font-bold mb-2">NexaMart (Full‑Stack E‑commerce)</h3>
-          <p class="text-gray-400 text-sm mb-3">Next.js 14, NestJS API, PostgreSQL, Prisma ORM, Tailwind, Stripe integration. Full cart, auth, and admin dashboard.</p>
-          <div class="flex flex-wrap gap-2 mt-3"><span class="px-2 py-1 text-xs rounded-full bg-purple-600/30">Next.js</span><span class="px-2 py-1 text-xs rounded-full bg-blue-600/30">NestJS</span><span class="px-2 py-1 text-xs rounded-full bg-emerald-600/30">Prisma</span><span class="px-2 py-1 text-xs rounded-full bg-sky-600/30">PostgreSQL</span></div>
-        </div>
+<section id="journey" style="background:color-mix(in srgb,var(--card) 50%,transparent)"><div class="wrap">
+  <p class="eyebrow mono rv">// process</p><h2 class="rv">How I <span class="grad">work</span></h2>
+  <div class="tl">
+    <div class="rv"><h3>1. Understand</h3><p class="mut">Clarify goals, users and constraints before writing code.</p></div>
+    <div class="rv"><h3>2. Architect</h3><p class="mut">Design the data model and API with scale in mind.</p></div>
+    <div class="rv"><h3>3. Build</h3><p class="mut">Ship clean, typed, tested features in small increments.</p></div>
+    <div class="rv"><h3>4. Polish &amp; Deploy</h3><p class="mut">Optimize performance, containerize and launch.</p></div>
+  </div>
+</div></section>
 
-        <!-- Project 2: Nuxt.js + NestJS + Prisma Social Platform -->
-        <div class="project-card-modern p-6 group">
-          <div class="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center mb-5"><i class="fab fa-vuejs text-2xl text-green-400"></i></div>
-          <h3 class="text-xl font-bold mb-2">CreatorsHub (Nuxt 3 + Nest)</h3>
-          <p class="text-gray-400 text-sm mb-3">Content creator platform with real-time notifications, PostgreSQL & Prisma ORM. Nuxt 3 SSR, NestJS microservices, JWT auth.</p>
-          <div class="flex flex-wrap gap-2"><span class="px-2 py-1 text-xs rounded-full bg-green-600/30">Nuxt.js</span><span class="px-2 py-1 text-xs rounded-full bg-pink-600/30">NestJS</span><span class="px-2 py-1 text-xs rounded-full bg-blue-600/30">Prisma</span><span class="px-2 py-1 text-xs rounded-full bg-gray-600/30">WebSockets</span></div>
-        </div>
+<section id="contact"><div class="wrap ct">
+  <p class="eyebrow mono rv">// contact</p><h2 class="rv">Let's build <span class="grad">something great</span></h2>
+  <p class="mut rv">Ready to scale your next project? I'm just a message away.</p>
+  <div class="grid3">
+    <a class="card rv" href="mailto:mitikunathan@gmail.com"><div class="num">✉️</div><h3>Email</h3><p class="mut">mitikunathan@gmail.com</p></a>
+    <a class="card rv" href="https://www.linkedin.com/in/natnael-mitiku-b080321b7/"><div class="num">💼</div><h3>LinkedIn</h3><p class="mut">Connect with me</p></a>
+    <a class="card rv" href="https://github.com/Natnael22sds"><div class="num">🐙</div><h3>GitHub</h3><p class="mut">See my code</p></a>
+  </div>
+</div></section>
 
-        <!-- Project 3: AI-powered Dashboard with Next.js + Prisma -->
-        <div class="project-card-modern p-6 group">
-          <div class="w-12 h-12 rounded-xl bg-amber-500/20 flex items-center justify-center mb-5"><i class="fas fa-chart-line text-2xl text-amber-400"></i></div>
-          <h3 class="text-xl font-bold mb-2">InsightAI Analytics</h3>
-          <p class="text-gray-400 text-sm mb-3">Next.js + Prisma + PostgreSQL, AI-driven KPI dashboard. Real-time data aggregation, role-based access, and beautiful charts.</p>
-          <div class="flex flex-wrap gap-2"><span class="px-2 py-1 text-xs rounded-full bg-black/40">Next.js 14</span><span class="px-2 py-1 text-xs rounded-full bg-indigo-600/30">Prisma</span><span class="px-2 py-1 text-xs rounded-full bg-orange-600/30">PostgreSQL</span><span class="px-2 py-1 text-xs rounded-full bg-blue-600/30">Tailwind</span></div>
-        </div>
+<footer>© 2026 Natnael Mitiku — Full-Stack Developer · Built with care in Ethiopia</footer>
+<button id="top" aria-label="Back to top">↑</button>
 
-        <!-- Project 4: Hospital System (PHP + MySQL) -->
-        <div class="project-card-modern p-6 group">
-          <div class="w-12 h-12 rounded-xl bg-red-500/20 flex items-center justify-center mb-5"><i class="fas fa-hospital-user text-2xl text-red-400"></i></div>
-          <h3 class="text-xl font-bold mb-2">MediCare Appointment</h3>
-          <p class="text-gray-400 text-sm mb-3">Zocdoc-style booking system with PHP OOP, MySQL, Tailwind. Payment gateway, email notifications & multi-role portal.</p>
-          <div class="flex flex-wrap gap-2"><span class="px-2 py-1 text-xs rounded-full bg-purple-600/30">PHP</span><span class="px-2 py-1 text-xs rounded-full bg-blue-600/30">MySQL</span><span class="px-2 py-1 text-xs rounded-full bg-green-600/30">JavaScript</span></div>
-        </div>
-
-        <!-- Project 5: Recipe Sharing with Nuxt + Node + PostgreSQL -->
-        <div class="project-card-modern p-6 group">
-          <div class="w-12 h-12 rounded-xl bg-cyan-500/20 flex items-center justify-center mb-5"><i class="fas fa-utensils text-2xl text-cyan-400"></i></div>
-          <h3 class="text-xl font-bold mb-2">FlavorVerse (Nuxt & Node)</h3>
-          <p class="text-gray-400 text-sm mb-3">Modern recipe platform with JWT, likes, comments, and PostgreSQL database. Built with Nuxt.js frontend and Node.js API.</p>
-          <div class="flex flex-wrap gap-2"><span class="px-2 py-1 text-xs rounded-full bg-green-600/30">Nuxt.js</span><span class="px-2 py-1 text-xs rounded-full bg-gray-600/30">Node.js</span><span class="px-2 py-1 text-xs rounded-full bg-blue-600/30">PostgreSQL</span></div>
-        </div>
-
-        <!-- Project 6: Tesla Clone (React Native) + NestJS backend -->
-        <div class="project-card-modern p-6 group">
-          <div class="w-12 h-12 rounded-xl bg-gray-500/20 flex items-center justify-center mb-5"><i class="fas fa-car text-2xl text-gray-300"></i></div>
-          <h3 class="text-xl font-bold mb-2">DriveEV Mobile App</h3>
-          <p class="text-gray-400 text-sm mb-3">React Native + NestJS backend, Prisma ORM, PostgreSQL. Vehicle configurator, booking flow, and push notifications.</p>
-          <div class="flex flex-wrap gap-2"><span class="px-2 py-1 text-xs rounded-full bg-cyan-600/30">React Native</span><span class="px-2 py-1 text-xs rounded-full bg-red-600/30">NestJS</span><span class="px-2 py-1 text-xs rounded-full bg-purple-600/30">Prisma</span></div>
-        </div>
-      </div>
-      <div class="text-center mt-12"><a href="https://github.com/Natnael22sds" class="inline-flex items-center gap-2 glass-premium px-7 py-3 rounded-full hover:border-purple-400 transition"><i class="fab fa-github"></i> Explore more on GitHub <i class="fas fa-arrow-right"></i></a></div>
-    </div>
-  </section>
-
-  <!-- Contact Section + CTA -->
-  <section id="contact" class="py-24 relative">
-    <div class="container mx-auto px-6">
-      <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-4xl md:text-5xl font-bold mb-4">Let’s Build <span class="gradient-text">Something Great</span></h2>
-        <p class="text-gray-300 mb-10">Ready to scale your next project? I’m just a message away.</p>
-        <div class="grid sm:grid-cols-3 gap-6">
-          <a href="mailto:mitikunathan@gmail.com" class="glass-card p-6 rounded-2xl text-center hover:border-purple-400 transition group"><i class="fas fa-envelope text-3xl text-purple-400 mb-3"></i><h4 class="font-semibold">Email</h4><p class="text-sm text-gray-400">mitikunathan@gmail.com</p></a>
-          <a href="https://www.linkedin.com/in/natnael-mitiku-b080321b7/" class="glass-card p-6 rounded-2xl text-center hover:border-purple-400 transition"><i class="fab fa-linkedin text-3xl text-blue-400 mb-3"></i><h4 class="font-semibold">LinkedIn</h4><p class="text-sm text-gray-400">Connect with me</p></a>
-          <a href="https://github.com/Natnael22sds" class="glass-card p-6 rounded-2xl text-center hover:border-purple-400 transition"><i class="fab fa-github text-3xl text-gray-300 mb-3"></i><h4 class="font-semibold">GitHub</h4><p class="text-sm text-gray-400">Open source</p></a>
-        </div>
-        <div class="mt-12 glass-premium p-6 rounded-2xl"><p class="text-lg"><i class="fas fa-bolt text-yellow-400 mr-2"></i> Currently available for freelance & full-time opportunities. Let’s innovate together.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <footer class="py-8 border-t border-white/10 bg-[#0B0F1A]">
-    <div class="container mx-auto px-6 text-center text-gray-400 text-sm">© 2025 Natnael Mitiku — Full-Stack Architect. Modern Stack: Next.js • NestJS • Nuxt • PostgreSQL • Prisma</div>
-  </footer>
-
-  <button id="backToTop" class="fixed bottom-6 right-6 w-11 h-11 rounded-full glass-premium flex items-center justify-center hover:bg-purple-600 transition hidden"><i class="fas fa-arrow-up text-purple-300"></i></button>
-
-  <script>
-    // Mobile menu logic
-    const mobileBtn = document.getElementById('mobileBtn'), mobileMenu = document.getElementById('mobileMenu'), closeMobile = document.getElementById('closeMobile');
-    function toggleMenu(show){ mobileMenu.style.transform = show ? 'translateX(0)' : 'translateX(100%)'; document.body.style.overflow = show ? 'hidden' : 'auto'; }
-    mobileBtn.onclick = () => toggleMenu(true);
-    closeMobile.onclick = () => toggleMenu(false);
-    document.querySelectorAll('#mobileMenu a').forEach(link => link.addEventListener('click', () => toggleMenu(false)));
-    
-    // back to top
-    const backBtn = document.getElementById('backToTop');
-    window.addEventListener('scroll', () => { backBtn.classList.toggle('hidden', window.scrollY < 300); });
-    backBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-    
-    // smooth scroll all anchors
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        const target = this.getAttribute('href');
-        if(target === '#') return;
-        const el = document.querySelector(target);
-        if(el){ e.preventDefault(); window.scrollTo({ top: el.offsetTop - 70, behavior: 'smooth' }); toggleMenu(false); }
-      });
-    });
-    
-    // scroll reveal animation
-    const animatedElements = document.querySelectorAll('.animate-on-scroll');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
-    }, { threshold: 0.2 });
-    animatedElements.forEach(el => observer.observe(el));
-    document.querySelectorAll('.project-card-modern, .glass-card').forEach(el => observer.observe(el));
-    // add visible class manually for initial hero
-    document.querySelector('.animate-on-scroll')?.classList.add('visible');
-  </script>
+<script>
+// typing effect
+const words=['scalable web apps','Nuxt &amp; Next.js UIs','NestJS APIs','full-stack products'].map(w=>w.replace('&amp;','&'));
+let wi=0,ci=0,del=false;const t=document.getElementById('typed');
+(function type(){const w=words[wi];t.textContent=w.slice(0,ci);
+ if(!del&&ci===w.length){del=true;return setTimeout(type,1400)}
+ if(del&&ci===0){del=false;wi=(wi+1)%words.length}
+ ci+=del?-1:1;setTimeout(type,del?35:70)})();
+// marquee
+const tech=['Vue.js','Nuxt','React','Next.js','TypeScript','Node.js','NestJS','PostgreSQL','Prisma','Tailwind','Laravel','FastAPI','Docker'];
+document.getElementById('track').innerHTML=[...tech,...tech].map(x=>'<span>✦ '+x+'</span>').join('');
+// cursor glow
+const g=document.getElementById('glow');
+addEventListener('pointermove',e=>{g.style.left=e.clientX+'px';g.style.top=e.clientY+'px'});
+// progress + back to top
+const pr=document.getElementById('prog'),tp=document.getElementById('top');
+addEventListener('scroll',()=>{const h=document.documentElement;pr.style.width=(scrollY/(h.scrollHeight-innerHeight)*100)+'%';tp.style.display=scrollY>400?'block':'none'});
+tp.onclick=()=>scrollTo({top:0,behavior:'smooth'});
+// reveal + counters
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('v');
+ const n=e.target.querySelector('[data-n]');if(n){const to=+n.dataset.n;let i=0;const s=setInterval(()=>{n.textContent=++i;if(i>=to)clearInterval(s)},120)}
+ io.unobserve(e.target)}),{threshold:.15});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+// project filter
+document.querySelectorAll('.f').forEach(b=>b.onclick=()=>{
+ document.querySelectorAll('.f').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+ document.querySelectorAll('.proj').forEach(p=>p.classList.toggle('hide',b.dataset.f!=='all'&&!p.dataset.c.includes(b.dataset.f)))});
+// theme toggle (in-memory)
+document.getElementById('tg').onclick=()=>{const r=document.documentElement;
+ const dark=r.dataset.theme?r.dataset.theme==='dark':!matchMedia('(prefers-color-scheme:light)').matches;
+ r.dataset.theme=dark?'light':'dark'};
+</script>
 </body>
 </html>
